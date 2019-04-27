@@ -18,8 +18,15 @@
         <property name="mapperLocations" value="classpath:mapper/*-mapper.xml"/>
     </bean>
 
+    <!--这个配置是在dao的实现类中生成sqlSession的方式，老师讲的方式，比较老-->
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory"/>
+    </bean>
+
+    <!--使用接口与mapper文件绑定的方式，配置dao层接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="cn.lqs.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
 </beans>

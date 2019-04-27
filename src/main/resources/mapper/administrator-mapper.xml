@@ -3,5 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.lqs.dao.Administrator">
-
+    <sql id="param">
+         id,
+         acount,
+         password,
+         'position'
+    </sql>
+    <select id="selectOneByAccountAndPwd" resultType="cn.lqs.administrator.bean.Administrator" >
+        select
+        <include refid="param"></include>
+        from administrator
+        where acount = ${acount} and password = ${password}
+    </select>
 </mapper>
