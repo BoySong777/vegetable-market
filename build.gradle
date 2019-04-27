@@ -1,0 +1,34 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'cn.lqs'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    //avenCentral()
+    maven {
+        url 'http://maven.aliyun.com/nexus/content/groups/public/'
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile 'javax:javaee-api:7.0'
+    compile 'org.springframework:spring-webmvc:5.1.1.RELEASE'
+    compile 'org.springframework:spring-jdbc:5.1.1.RELEASE'
+    compile 'org.springframework:spring-context-support:5.1.1.RELEASE'
+    compile 'org.mybatis:mybatis:3.4.6'
+    compile 'org.mybatis:mybatis-spring:1.3.2'
+    compile 'mysql:mysql-connector-java:5.1.39'
+    compile 'jstl:jstl:1.2'
+    compile 'org.projectlombok:lombok:1.18.2'
+    compile 'commons-dbcp:commons-dbcp:1.4'
+    compile 'org.slf4j:slf4j-log4j12:1.7.25'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
+    compile 'commons-fileupload:commons-fileupload:1.3.2'
+}
