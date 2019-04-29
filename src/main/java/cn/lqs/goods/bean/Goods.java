@@ -5,7 +5,7 @@
  */
 package cn.lqs.goods.bean;
 
-import cn.lqs.base.BaseModel;
+import cn.lqs.base.DoMain;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 @ToString
 @Component
-public class Goods extends BaseModel {
+public class Goods extends DoMain {
     private String name;
     private String categoryId;//一级类别
     private String typeId;//二级类别

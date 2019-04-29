@@ -22,4 +22,19 @@ public class AdministratorImpl implements AdministratorService {
         Administrator administrator1 = administratorDao.selectOneByAccountAndPwd(administrator);
         return administrator1;
     }
+
+    @Override
+    public void updatePassword(Administrator administrator) {
+        administratorDao.modify(administrator);
+    }
+
+    @Override
+    public void create(Administrator administrator) {
+        administratorDao.create(administrator);
+    }
+
+    @Override
+    public void remove(String id) {
+        administratorDao.remove(id);
+    }
 }

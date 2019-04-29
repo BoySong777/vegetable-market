@@ -5,7 +5,7 @@
  */
 package cn.lqs.order.bean;
 
-import cn.lqs.base.BaseModel;
+import cn.lqs.base.DoMain;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 @ToString
 @Component
-public class OrderGoods extends BaseModel {
+public class OrderGoods extends DoMain {
     private String orderId;
     private String goodsId;
     private Integer number;

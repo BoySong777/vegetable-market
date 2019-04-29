@@ -5,7 +5,7 @@
  */
 package cn.lqs.order.bean;
 
-import cn.lqs.base.BaseModel;
+import cn.lqs.base.DoMain;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 @ToString
 @Component
-public class Order extends BaseModel {
+public class Order extends DoMain {
     private String userId;
     private String userInfo;
     private Date createTime;

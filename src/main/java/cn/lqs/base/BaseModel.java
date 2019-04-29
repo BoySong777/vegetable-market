@@ -9,7 +9,25 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-@Data
-public class BaseModel implements Serializable {
-    private String id;
+/**
+ * 创建实体的类
+ */
+public class BaseModel {
+
+    /**
+     *
+     * @param clazz 实体类型.class
+     * @param <T>
+     * @return id为null的实体类的对象
+     */
+    public static <T> T getModel(Class<?> clazz){
+      try{
+          DoMain domain = (DoMain) clazz.newInstance();
+          ((DoMain)domain).setId(null);
+          return (T)domain;
+      } catch (Exception e){
+          System.err.println("创建实体类时出错，位置在BaseMdel.getModel");
+      }
+      return null;
+    }
 }

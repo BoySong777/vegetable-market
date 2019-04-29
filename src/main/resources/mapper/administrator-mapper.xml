@@ -13,6 +13,15 @@
         select
         <include refid="param"></include>
         from administrator
-        where acount = ${acount} and password = ${password}
+        where acount = #{acount} and password = #{password}
     </select>
+    <insert id="create" >
+        insert into administrator(id,acount,password) value(#{id},#{acount},#{password})
+    </insert>
+    <update id="modify">
+        update administrator set password = #{password} where id = #{id}
+    </update>
+    <delete id="remove" parameterType="string" >
+        delete from administrator where id=#{string}
+    </delete>
 </mapper>

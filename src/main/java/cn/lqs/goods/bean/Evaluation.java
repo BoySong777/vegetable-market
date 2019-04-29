@@ -5,7 +5,7 @@
  */
 package cn.lqs.goods.bean;
 
-import cn.lqs.base.BaseModel;
+import cn.lqs.base.DoMain;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import java.util.Date;
 @Data
 @ToString
 @Component
-public class Evaluation extends BaseModel {
+public class Evaluation extends DoMain {
     private String userId;
     private String goodsId;
     private String content;

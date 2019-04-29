@@ -5,7 +5,7 @@
  */
 package cn.lqs.browse.bean;
 
-import cn.lqs.base.BaseModel;
+import cn.lqs.base.DoMain;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 @ToString
 @Component
-public class BrowseRecord extends BaseModel {
+public class BrowseRecord extends DoMain {
     private String userId;
     private String goodsId;
     private String categoryId;

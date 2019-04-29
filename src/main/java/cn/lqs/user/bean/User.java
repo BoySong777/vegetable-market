@@ -5,7 +5,7 @@
  */
 package cn.lqs.user.bean;
 
-import cn.lqs.base.BaseModel;
+import cn.lqs.base.DoMain;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Data
 @ToString
 @Component
-public class User extends BaseModel {
+public class User extends DoMain {
     private String account;
     private String name;
     private String avatar;

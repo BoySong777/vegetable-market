@@ -5,7 +5,7 @@
  */
 package cn.lqs.administrator.bean;
 
-import cn.lqs.base.BaseModel;
+import cn.lqs.base.DoMain;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ToString
 @Data
-public class Administrator extends BaseModel {
+public class Administrator extends DoMain {
     private String acount;
     private String password;
     private String position;
