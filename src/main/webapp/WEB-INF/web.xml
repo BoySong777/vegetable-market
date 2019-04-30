@@ -27,7 +27,9 @@
 
     <servlet-mapping>
         <servlet-name>default</servlet-name>
-        <url-pattern>/static/*</url-pattern>
+        <url-pattern>/assets/*</url-pattern>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>/favicon.ico</url-pattern>
     </servlet-mapping>
 
     <listener>
@@ -38,6 +40,20 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
+    <!--配置过滤器，验证是否登录（后台管理页面）-->
+    <filter>
+        <filter-name>loginFilter</filter-name>
+        <filter-class>cn.lqs.filter.LoginFilter</filter-class>
+        <init-param>
+            <!--指定跳转页面-->
+            <param-name>dispatchUrl</param-name>
+            <param-value>/administratorController/login</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>loginFilter</filter-name>
+        <url-pattern>/jsp/manage-page/*</url-pattern>
+    </filter-mapping>
 
     <!--在 Service 层使用 HttpServletRequest-->
     <listener>

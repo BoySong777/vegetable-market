@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @ToString
 @Data
 public class Administrator extends DoMain {
-    private String acount;
+    private String account;
     private String password;
     private String position;
 }

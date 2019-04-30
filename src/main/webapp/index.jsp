@@ -9,8 +9,9 @@
 <html>
   <head>
     <title>$Title$</title>
+    <jsp:include page="commons/base.jsp"></jsp:include>
   </head>
   <body>
-  $END$
+  <a href="${ctx}/administratorController/login">确定</a>
   </body>
 </html>

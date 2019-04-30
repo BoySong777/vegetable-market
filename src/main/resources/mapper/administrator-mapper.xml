@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.lqs.dao.Administrator">
+<mapper namespace="cn.lqs.dao.AdministratorDao">
     <sql id="param">
          id,
-         acount,
+         account,
          password,
          'position'
     </sql>
@@ -13,10 +13,10 @@
         select
         <include refid="param"></include>
         from administrator
-        where acount = #{acount} and password = #{password}
+        where account = #{account} and password = #{password}
     </select>
     <insert id="create" >
-        insert into administrator(id,acount,password) value(#{id},#{acount},#{password})
+        insert into administrator(id,account,password) value(#{id},#{account},#{password})
     </insert>
     <update id="modify">
         update administrator set password = #{password} where id = #{id}
