@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class User extends DoMain {
     private String account;
+    private String password;
     private String name;
     private String avatar;
     private String sex;

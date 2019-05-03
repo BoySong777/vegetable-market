@@ -7,9 +7,13 @@ public interface AdministratorService {
 
     Administrator verifyLogin(Administrator administrator);
 
-    void updatePassword(Administrator administrator);
+    Boolean verifyPassword(String password);
+
+    void updatePassword(String password);
 
     void create(Administrator administrator);
 
     void remove(String id);
+
+    void signOut();
 }

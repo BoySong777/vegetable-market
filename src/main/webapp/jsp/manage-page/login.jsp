@@ -67,7 +67,7 @@
                     success: function(data) {
                         if(data.isTrue){
                             me.loginErr = "";
-                            window.location.href =basePath+"/jsp/manage-page/index.jsp";
+                            window.location.href =basePath+"/jsp/manage-page/frame.jsp";
                         }else{
                             me.loginErr = "账户或密码错误！";
                         }

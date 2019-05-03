@@ -7,7 +7,7 @@
          id,
          account,
          password,
-         'position'
+        `position`
     </sql>
     <select id="selectOneByAccountAndPwd" resultType="cn.lqs.administrator.bean.Administrator" >
         select
@@ -18,7 +18,7 @@
     <insert id="create" >
         insert into administrator(id,account,password) value(#{id},#{account},#{password})
     </insert>
-    <update id="modify">
+    <update id="updatePassword">
         update administrator set password = #{password} where id = #{id}
     </update>
     <delete id="remove" parameterType="string" >

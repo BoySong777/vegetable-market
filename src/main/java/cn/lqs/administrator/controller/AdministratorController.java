@@ -9,10 +9,7 @@ import cn.lqs.administrator.bean.Administrator;
 import cn.lqs.administrator.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,5 +37,27 @@ public class AdministratorController {
             map.put("isTrue",false);
         }
         return map;
+    }
+    @RequestMapping(value = "verifyPassword", method = RequestMethod.POST)
+    @ResponseBody
+    private Object verifyPassword(@RequestBody Map<String,String> data){
+        System.out.println("接收到的密码是："+data.get("password"));
+        Boolean isTure = administratorService.verifyPassword(data.get("password"));
+        Map<String,Boolean> map = new HashMap<>();
+        map.put("isTrue",isTure);
+        return map;
+    }
+    @RequestMapping(value = "modifyPassword", method = RequestMethod.POST)
+    @ResponseBody
+    private Object modifyPassword(@RequestBody Map<String,String> data){
+        administratorService.updatePassword(data.get("password"));
+        Map<String,Boolean> map = new HashMap<>();
+        map.put("data",true);
+        return map;
+    }
+    @RequestMapping(value = "signOut")
+    public String signOut(){
+       administratorService.signOut();
+        return "redirect:/administratorController/login";
     }
 }

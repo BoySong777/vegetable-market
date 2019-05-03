@@ -30,8 +30,22 @@ public class AdministratorServiceImpl implements AdministratorService {
     }
 
     @Override
-    public void updatePassword(Administrator administrator) {
-        administratorDao.modify(administrator);
+    public Boolean verifyPassword(String password) {
+       Administrator administrator= (Administrator)request.getSession().getAttribute("admin");
+       if(administrator!=null&&password!=null){
+           if(password.equals(administrator.getPassword())){
+               return true;
+           }
+       }
+       return false;
+    }
+
+    @Override
+    public void updatePassword(String password) {
+        Administrator administrator= (Administrator)request.getSession().getAttribute("admin");
+        administrator.setPassword(password);
+        administratorDao.updatePassword(administrator);
+        this.signOut();
     }
 
     @Override
@@ -42,5 +56,10 @@ public class AdministratorServiceImpl implements AdministratorService {
     @Override
     public void remove(String id) {
         administratorDao.remove(id);
+    }
+
+    @Override
+    public void signOut() {
+        request.getSession().invalidate();
     }
 }
