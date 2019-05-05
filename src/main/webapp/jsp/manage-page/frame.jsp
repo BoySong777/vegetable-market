@@ -87,10 +87,12 @@
                 <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-caiwu left"></i>财务管理</a>
             </li>
             <li>
-                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-icon left"></i>报表模块<i
+                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-ai-wallet left"></i>员工管理<i
                         class="iconfont icon-dajiantouyou right"></i></a>
                 <dl>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/reportForm/reportForm1.html',this)">订单统计报表</a>
+                    <dt><a href="javascript:void(0)" onclick="menuCAClick('admin/list.jsp',this)">员工列表</a>
+                    </dt>
+                    <dt><a href="javascript:void(0)" onclick="menuCAClick('admin/add.jsp',this)">新增员工</a>
                     </dt>
                 </dl>
             </li>
@@ -105,7 +107,7 @@
         <img class="jt" src="${ctx}/assets/managePage/images/top_jt.png"/>
         <div class="topMenu">
             <ul>
-                <li><a href="javascript:void(0)" onclick="menuCAClick('tgls/modify_password.html',this)"><i class="iconfont icon-yonghu1"></i>${admin.position}</a></li>
+                <li><a href="javascript:void(0)" onclick="menuCAClick('admin-detail.jsp',this)"><i class="iconfont icon-yonghu1"></i>${admin.account}</a></li>
                 <li><a href="javascript:void(0)" onclick="menuCAClick('edit-password.jsp',this)"><i class="iconfont icon-xiugaimima"></i>修改密码</a></li>
                 <li><a href="${ctx}/administratorController/signOut"><i class="iconfont icon-084tuichu"></i>注销</a></li>
             </ul>

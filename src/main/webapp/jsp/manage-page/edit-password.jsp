@@ -67,7 +67,7 @@
                                 contentType:'application/json',
                                 success:function (data) {
                                     if(data.data){
-                                        layer.msg("修改成功");
+                                        layer.msg("修改成功",{icon: 1});
                                         window.parent.location.reload();
                                     }else{
                                         layer.alert("修改密码失败！",{icon:5,title:"警告"});
@@ -85,7 +85,6 @@
                     }
 
                 });
-                layer.msg(JSON.stringify(data.field.password));
                 return false;
             });
         });

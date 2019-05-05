@@ -16,6 +16,10 @@ public class PagingProperty {
      * 当前页面索引，从1开始(for easyUI)
      */
     private Integer page;
+    /**
+     * 页面显示数量，默认10条(for layUI)
+     */
+    private Integer limit;
 
     /**
      * 页面显示数量，默认10条（for easyUI)
@@ -63,5 +67,38 @@ public class PagingProperty {
      * 排序方式
      */
     private String sort;
+
+    public Integer getStartIndex() {
+        if(page == null && pageIndex != null){
+            startIndex = pageIndex * getRowCount();
+        }else if(page != null && pageIndex == null){
+            startIndex = (page-1) * getRowCount();		//easyUI的页面索引是从1开始
+        }
+        return startIndex;
+    }
+    public Integer getEndIndex() {
+        if(page == null && pageIndex != null){
+            endIndex = (pageIndex + 1) * getRowCount();
+        }else if(page != null && pageIndex == null){
+            endIndex = page * getRowCount();
+        }
+        return endIndex;
+    }
+    public Integer getRowCount() {
+        if(rows != null && pageSize == null){
+            rowCount = rows;
+        }else if(rows == null && pageSize != null){
+            rowCount = pageSize;
+        }else if (limit!=null){
+            rowCount = limit;
+        }
+        return rowCount;
+    }
+    public boolean isPagingFlag() {
+        if(pagination == false) {
+            pagingFlag = false;
+        }
+        return pagingFlag;
+    }
 
 }

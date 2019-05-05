@@ -6,8 +6,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>网上菜市场</title>
     <jsp:include page="../../commons/base.jsp"></jsp:include>
+    <link rel="shortcut icon" href="${ctx}/assets/managePage/images/favicon.ico"/>
+    <link rel="bookmark" href="${ctx}/assets/managePage/images/favicon.ico"/>
     <script type="text/javascript" src="${ctx}/assets/script/vue-router.js"></script>
     <link href="${ctx}/assets/css/reset.css" rel="stylesheet" type="text/css" />
     <link href="${ctx}/assets/css/login.css" rel="stylesheet" type="text/css" />
@@ -43,8 +45,8 @@
         el:"#root",
         data:{
             params:{
-                account:"",
-                password:""
+                account:"admin",
+                password:"1"
             },
             loginErr:""
         },

@@ -7,7 +7,8 @@
          id,
          account,
          password,
-        `position`
+        `position`,
+        phone
     </sql>
     <select id="selectOneByAccountAndPwd" resultType="cn.lqs.administrator.bean.Administrator" >
         select
@@ -15,11 +16,47 @@
         from administrator
         where account = #{account} and password = #{password}
     </select>
+    <select id="queryList" resultType="cn.lqs.administrator.bean.Administrator">
+        select
+        <include refid="param"></include>
+        from administrator
+        where 1=1
+        <if test="administrator.position!=null and administrator.position!=''">
+            and `position` = #{administrator.position}
+        </if>
+        <if test="administrator.account!=null and administrator.account!=''">
+            and account like concat(#{administrator.account},'%')
+        </if>
+        <if test="pagingFlag==true">
+            limit #{startIndex},#{rowCount}
+        </if>
+    </select>
+    <select id="countModelNum" resultType="integer">
+        select count(1) from administrator where 1=1
+        <if test="administrator.position!=null and administrator.position!=''">
+            and `position` = #{administrator.position}
+        </if>
+        <if test="administrator.account!=null and administrator.account!=''">
+            and account like concat(#{administrator.account},'%')
+        </if>
+    </select>
+    <select id="queryById" resultType="cn.lqs.administrator.bean.Administrator">
+        select
+        <include refid="param"></include>
+        from administrator
+        where id = #{id}
+    </select>
+    <select id="selectAccount" resultType="integer">
+        select count(*) from administrator where account=#{account}
+    </select>
     <insert id="create" >
-        insert into administrator(id,account,password) value(#{id},#{account},#{password})
+        insert into administrator(id,account,password,position,phone) value(#{id},#{account},#{password},#{position},#{phone})
     </insert>
     <update id="updatePassword">
         update administrator set password = #{password} where id = #{id}
+    </update>
+    <update id="modify">
+        update administrator set phone = #{phone},account=#{account}, `position`=#{position} where id = #{id}
     </update>
     <delete id="remove" parameterType="string" >
         delete from administrator where id=#{string}
