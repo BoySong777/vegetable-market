@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lqs.dao.AddressDao">
+    <sql id="params">
+        id,
+        user_id userId,
+        province,
+        area,
+        street,
+        detail,
+        phone,
+        recipient
+    </sql>
+
+    <select id="queryListByUserId" parameterType="string" resultType="cn.lqs.address.bean.Address">
+        select
+        <include refid="params"></include>
+        from address where user_id = #{id}
+    </select>
+    <select id="queryNameByProvinceCode" parameterType="long" resultType="string">
+        select name from province where code = #{code}
+    </select>
+</mapper>

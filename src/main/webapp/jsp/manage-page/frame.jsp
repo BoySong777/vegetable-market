@@ -58,12 +58,12 @@
                 </dl>
             </li>
             <li>
-                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-yunying left"></i>基础库内容<i
+                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-yunying left"></i>用户管理<i
                         class="iconfont icon-dajiantouyou right"></i></a>
                 <dl>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/base/base_add.html',this)">表单含编辑器</a>
+                    <dt><a href="javascript:void(0)" onclick="menuCAClick('user/list.jsp',this)">用户列表</a>
                     </dt>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/base/base_list.html',this)">常用列表</a>
+                    <dt><a href="javascript:void(0)" onclick="menuCAClick('user/analysis.jsp',this)">用户统计</a>
                     </dt>
                     <dt><a href="javascript:void(0)"
                            onclick="menuCAClick('tgls/base/base_customList.html',this)">可新增的列表</a></dt>

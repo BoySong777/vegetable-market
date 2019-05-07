@@ -1,14 +1,18 @@
-package cn.lqs.dao;
+/**
+ * User: LiQingsong
+ * Date: 2019/5/6
+ * Time: 10:03
+ */
+package cn.lqs.base;
 
+import cn.lqs.util.QueryResult;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.io.Serializable;
 import java.util.List;
 
-public interface DAO<T extends Serializable> {
+public interface BaseService<T extends Serializable> {
 
     void create(T t);
-
     List<T> queryList(Object parameter);
 
     /**
@@ -24,4 +28,5 @@ public interface DAO<T extends Serializable> {
 
     void remove(String id);
 
+    QueryResult<T> findList(Object object);
 }

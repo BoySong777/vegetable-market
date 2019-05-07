@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lqs.dao.UserDao">
+    <sql id="params">
+         id,
+        account,
+        avatar,
+        sex,
+        phone,
+        email,
+        create_time createTime
+    </sql>
+    <select id="queryList" resultType="cn.lqs.user.bean.User">
+        select <include refid="params"></include>
+        from user where 1=1
+        <if test="user.account!=null and user.account!=''">
+             and account like concat(#{user.account},'%')
+        </if>
+        <if test="user.sex!=null">
+            and sex = #{user.sex}
+        </if>
+        <if test="user.phone!=null and user.phone!=''">
+            and phone = #{user.phone}
+        </if>
+        <if test="user.email!=null and user.email!=''">
+            and email = #{user.email}
+        </if>
+        <if test="pagingFlag==true">
+            limit #{startIndex},#{rowCount}
+        </if>
+    </select>
+    <select id="countModelNum" resultType="integer">
+        select count(1)
+        from user where 1=1
+        <if test="user.account!=null and user.account!=''">
+            and account like concat(#{user.account},'%')
+        </if>
+        <if test="user.sex!=null">
+            and sex = #{user.sex}
+        </if>
+        <if test="user.phone!=null and user.phone!=''">
+            and phone like concat(#{user.phone},'%')
+        </if>
+        <if test="user.email!=null and user.email!=''">
+            and email like concat(#{user.email},'%')
+        </if>
+    </select>
+    <select id="queryById" resultType="cn.lqs.user.bean.User">
+        select
+        <include refid="params"></include>
+        from user
+        where id = #{id}
+    </select>
+    <update id="resetPassword" parameterType="string">
+        update user set password = 123
+        where id = #{id}
+    </update>
+    <delete id="remove" parameterType="string">
+        delete from user where id=#{id}
+    </delete>
+</mapper>

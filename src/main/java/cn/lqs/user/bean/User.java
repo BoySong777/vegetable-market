@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Data
 @ToString
 @Component
@@ -18,6 +20,20 @@ public class User extends DoMain {
     private String password;
     private String name;
     private String avatar;
-    private String sex;
+    private Integer sex;
+    private String sexName;
     private String phone;
+    private String email;
+    private Date createTime;
+
+    public String getSexName(){
+        if(sex==0){
+            sexName = "女";
+        } else if(sex==1){
+            sexName = "男";
+        }else{
+            sexName = "";
+        }
+        return sexName;
+    }
 }

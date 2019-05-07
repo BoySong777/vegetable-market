@@ -1,6 +1,8 @@
 <%
     String ctx = request.getContextPath();
     request.setAttribute("ctx",ctx);
+    String img = "http://localhost:81/img/";
+    request.setAttribute("img",img);
 %>
 
 <!--bootstrap css-->

@@ -15,6 +15,8 @@
 <%
     String ctx = request.getContextPath();
     request.setAttribute("ctx",ctx);
+    String img = "http://localhost:81/img/";
+    request.setAttribute("img",img);
 %>
 <link rel="stylesheet" type="text/css" href="${ctx}/assets/managePage/css/base.css">
 <link rel="stylesheet" type="text/css" href="${ctx}/assets/managePage/css/iconfont.css">
