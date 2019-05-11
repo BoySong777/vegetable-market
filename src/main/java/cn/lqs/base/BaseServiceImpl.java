@@ -7,13 +7,17 @@ package cn.lqs.base;
 
 import cn.lqs.dao.DAO;
 import cn.lqs.util.QueryResult;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.List;
 
 public abstract class BaseServiceImpl<T extends Serializable> implements BaseService<T> {
 
     protected DAO<T> dao;
+    @Autowired
+    protected HttpServletRequest request;
 
     public abstract void setDao(DAO<T> dao);
 

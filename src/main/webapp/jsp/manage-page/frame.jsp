@@ -39,9 +39,9 @@
                         class="iconfont icon-liuliangyunpingtaitubiao03 left"></i>用户管理<i
                         class="iconfont icon-dajiantouyou right"></i></a>
                 <dl>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/agent/agent_add.html',this)">用户列表</a>
+                    <dt><a href="javascript:void(0)" onclick="menuCAClick('user/list.jsp',this)">用户列表</a>
                     </dt>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/agent/agent_list.html',this)">用户分析</a>
+                    <dt><a href="javascript:void(0)" onclick="menuCAClick('user/analysis.jsp',this)">用户分析</a>
                     </dt>
                 </dl>
             </li>
@@ -51,10 +51,10 @@
                 <dl>
                     <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/goodsManage/goodsType_list.html',this)">分类列表</a>
                     </dt>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/goodsManage/goods_list.html',this)">基本商品库</a>
+                    <dt><a href="javascript:void(0)" onclick="menuCAClick('goods/list.jsp',this)">商品列表</a>
                     </dt>
                     <dt><a href="javascript:void(0)"
-                           onclick="menuCAClick('tgls/goodsManage/goods_add.html',this)">添加商品</a></dt>
+                           onclick="menuCAClick('goods/add.jsp',this)">添加商品</a></dt>
                 </dl>
             </li>
             <li>

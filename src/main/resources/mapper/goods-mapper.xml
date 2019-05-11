@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lqs.dao.GoodsDao">
+    <sql id="params">
+        id,
+        name,
+        category_code categoryCode,
+        type_code typeCode,
+        price,
+        discount,
+        avatar,
+        stock,
+        brand
+    </sql>
+    <sql id="detailParams">
+        id,
+        goods_id goodsId,
+        imgs,
+        specification,
+        shelf_life shelfLife,
+        edible_method edibleMethod,
+        details,
+        `description`
+    </sql>
+    <select id="queryList" resultType="cn.lqs.goods.bean.Goods">
+        select <include refid="params"></include>
+        from goods where is_delete = 0
+        <if test="goods.name!=null and goods.name!=''">
+            and name like concat(#{goods.name},'%')
+        </if>
+        <if test="goods.categoryCode!=null">
+            and category_code like concat(#{goods.categoryCode},'%')
+        </if>
+        <if test="goods.typeCode!=null">
+            and type_code like concat(#{goods.typeCode},'%')
+        </if>
+        <if test="goods.brand!=null and goods.brand!=''">
+            and brand like concat(#{goods.brand},'%')
+        </if>
+        <if test="goods.stock!=null">
+            and stock = #{goods.stock}
+        </if>
+        <if test="order=='price' and sort !=null and sort != ''">
+            order by price ${sort}
+        </if>
+        <if test="pagingFlag==true">
+            limit #{startIndex},#{rowCount}
+        </if>
+    </select>
+    <select id="countModelNum" resultType="integer">
+        select count(1)
+        from goods where is_delete = 0
+        <if test="goods.name!=null and goods.name!=''">
+            and name like concat(#{goods.name},'%')
+        </if>
+        <if test="goods.categoryCode!=null">
+            and category_code like concat(#{goods.categoryCode},'%')
+        </if>
+        <if test="goods.typeCode!=null">
+            and type_code like concat(#{goods.typeCode},'%')
+        </if>
+        <if test="goods.brand!=null and goods.brand!=''">
+            and brand like concat(#{goods.brand},'%')
+        </if>
+        <if test="goods.stock!=null">
+            and stock = #{goods.stock}
+        </if>
+    </select>
+    <select id="queryDetail" parameterType="string" resultType="cn.lqs.goods.bean.GoodsDetail">
+        select <include refid="detailParams"></include>
+        from goods_detail where goods_id = #{goodsId}
+    </select>
+    <select id="queryById"
+            parameterType="string"
+            resultType="cn.lqs.goods.bean.Goods">
+        select <include refid="params"></include>
+        from goods where id = #{id}
+    </select>
+    <insert id="create" parameterType="cn.lqs.goods.bean.Goods">
+        insert into goods(id,name,category_code,type_code,price,discount,avatar,brand) value (#{id},#{name},#{categoryCode},#{typeCode},#{price},#{discount},#{avatar},#{brand})
+    </insert>
+    <insert id="createDetail" parameterType="cn.lqs.goods.bean.GoodsDetail">
+        insert into
+          goods_detail(id,goods_id,imgs,specification,shelf_life,edible_method,details,`description`)
+         value (#{id},#{goodsId},#{imgs},#{specification},#{shelfLife},#{edibleMethod},#{details},#{description})
+    </insert>
+    <update id="remove" parameterType="string">
+        update goods set is_delete = 1 where id = #{id}
+    </update>
+    <update id="modify" parameterType="cn.lqs.goods.bean.Goods">
+        update goods set name = #{name},price = #{price},
+                         <if test="avatar!=null and avatar!=''">
+                             avatar=#{avatar},
+                         </if>
+                         brand=#{brand},discount=#{discount},stock=#{stock} where id = #{id}
+    </update>
+    <update id="modifyDetail" parameterType="cn.lqs.goods.bean.GoodsDetail">
+        update goods_detail set
+        <if test="imgs!=null and imgs!=''">
+            imgs = #{imgs},
+        </if>
+         specification = #{specification},shelf_life = #{shelfLife},
+          edible_method = #{edibleMethod},details = #{details},
+          `description` = #{description}
+    </update>
+</mapper>

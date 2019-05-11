@@ -70,6 +70,9 @@
         //监听提交
         form.on('submit(formDemo)', function(data) {
             tableIns.reload({
+                page:{
+                    curr:1
+                },
                 where:{
                     administrator:{
                         account:$.trim(data.field.account),

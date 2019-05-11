@@ -21,5 +21,4 @@ public class Evaluation extends DoMain {
     private String content;
     private Date time;
     private Integer score;
-
 }

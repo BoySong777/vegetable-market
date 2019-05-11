@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Category extends DoMain {
     private String name;
-    private Integer typeNumber;
-    private String fatherType;
+    private Long code;
+    private Long fatherCode;
+
 }

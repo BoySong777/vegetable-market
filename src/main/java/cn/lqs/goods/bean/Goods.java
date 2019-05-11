@@ -15,10 +15,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class Goods extends DoMain {
     private String name;
-    private String categoryId;//一级类别
-    private String typeId;//二级类别
-    private Double price;//商品图像
+    private Long categoryCode;//一级类别
+    private String categoryCodeName;
+    private Long typeCode;//二级类别
+    private String typeCodeName;
+    private Double price;//商品价格
+    private Double discount;//折扣
     private String avatar;//商品头像
+    private String brand;//品牌
+    private Integer stock;//库存
     private String isDelete;//是否被删除
 
 }

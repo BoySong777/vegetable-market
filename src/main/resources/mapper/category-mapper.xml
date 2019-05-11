@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lqs.dao.CategoryDao">
+    <sql id="params">
+        id,
+        name,
+        code,
+        father_code fatherCode
+
+    </sql>
+    <select id="queryListFirstCategory" resultType="cn.lqs.category.bean.Category">
+        select <include refid="params"></include>
+        from category
+        where father_code = 0 and is_delete = 0
+    </select>
+    <select id="queryListSecondCategory" resultType="cn.lqs.category.bean.Category" parameterType="long">
+        select <include refid="params"></include>
+        from category
+        where is_delete = 0 and father_code = #{code}
+    </select>
+    <select id="selectNameByCode" parameterType="long" resultType="string">
+        select name from category where code = #{code}
+    </select>
+    <insert id="create" parameterType="cn.lqs.category.bean.Category">
+        insert into category(id,name,code,father_code) value (#{id},#{name},#{code},#{father_code})
+    </insert>
+    <update id="remove" parameterType="string">
+        update category set is_delete = 1 where id = #{id}
+    </update>
+    <update id="modify" parameterType="cn.lqs.category.bean.Category">
+        update category set name = #{name} where id = #{id}
+    </update>
+</mapper>

@@ -90,6 +90,9 @@
         form.on('submit(formDemo)', function(data) {
             tableIns.reload({
                 where:{
+                    page:{
+                        curr:1
+                    },
                     user:{
                         account:$.trim(data.field.account),
                         sex:data.field.sex,
