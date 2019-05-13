@@ -10,16 +10,25 @@ import cn.lqs.util.QueryResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.Serializable;
 import java.util.List;
 
 public abstract class BaseServiceImpl<T extends Serializable> implements BaseService<T> {
 
     protected DAO<T> dao;
-    @Autowired
+
     protected HttpServletRequest request;
 
+    protected HttpSession session;
+
     public abstract void setDao(DAO<T> dao);
+
+    @Autowired
+    public void setRequest( HttpServletRequest request){
+        this.request = request;
+        this.session = request.getSession();
+    }
 
     @Override
     public void create(T t) {

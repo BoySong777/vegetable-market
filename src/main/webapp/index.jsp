@@ -5,13 +5,7 @@
   Time: 10:42
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-    <jsp:include page="commons/base.jsp"></jsp:include>
-  </head>
-  <body>
-  <a href="${ctx}/administratorController/login">确定</a>
-  </body>
-</html>
+
+    <%@include file="jsp/front-page/commons/com.jsp"%>
+    <%@include file="jsp/front-page/commons/head.jsp"%>
+

@@ -29,4 +29,6 @@
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
+    <import resource="spring-mail.xml"/>
+
 </beans>

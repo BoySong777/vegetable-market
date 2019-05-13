@@ -10,7 +10,9 @@
         sex,
         phone,
         email,
-        create_time createTime
+        create_time createTime,
+        token,
+        token_time tokenTime
     </sql>
     <select id="queryList" resultType="cn.lqs.user.bean.User">
         select <include refid="params"></include>
@@ -53,9 +55,36 @@
         from user
         where id = #{id}
     </select>
+    <select id="verifyAccount" resultType="integer" parameterType="string">
+        select count(1) from user where account = #{account}
+    </select>
+    <select id="verifyEmail" resultType="integer" parameterType="string">
+        select count(1) from user where email = #{email}
+    </select>
+    <select id="verifyLogin" resultType="cn.lqs.user.bean.User">
+        select <include refid="params"></include> from user where
+        (email = #{account}
+                             or account = #{account}
+                             or phone = #{account})
+                              and password = #{password}
+    </select>
+    <select id="selectIdByMail" parameterType="string" resultType="string">
+        select id from user where email = #{email}
+    </select>
+    <insert id="register" parameterType="cn.lqs.user.bean.User">
+        insert into user(id,account,password,avatar,sex,phone,email,create_time)
+         value (#{id},#{account},#{password},#{avatar},#{sex},#{phone},#{email},#{createTime})
+    </insert>
     <update id="resetPassword" parameterType="string">
         update user set password = 123
         where id = #{id}
+    </update>
+    <select id="updatePassword" parameterType="cn.lqs.user.bean.User">
+        update user set password = #{password}
+        where id = #{id}
+    </select>
+    <update id="setTokenById" parameterType="cn.lqs.user.bean.User">
+        update user set token = #{token},token_time = #{tokenTime} where id = #{id}
     </update>
     <delete id="remove" parameterType="string">
         delete from user where id=#{id}

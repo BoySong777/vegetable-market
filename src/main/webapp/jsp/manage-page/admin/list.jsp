@@ -83,7 +83,6 @@
             return false;
         });
 
-
     });
     function updateModel(d) {
         id = d;

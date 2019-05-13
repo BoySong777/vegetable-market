@@ -25,14 +25,18 @@ public class User extends DoMain {
     private String phone;
     private String email;
     private Date createTime;
+    private String token;
+    private Long tokenTime;
 
     public String getSexName(){
-        if(sex==0){
-            sexName = "女";
-        } else if(sex==1){
-            sexName = "男";
-        }else{
-            sexName = "";
+        if(sex!=null){
+            if(sex==0){
+                sexName = "女";
+            } else if(sex==1){
+                sexName = "男";
+            }else{
+                sexName = "";
+            }
         }
         return sexName;
     }
