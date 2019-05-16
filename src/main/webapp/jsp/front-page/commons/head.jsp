@@ -6,7 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav class="top ">
-    <a href="${contextPath}">
+    <a href="${ctx}">
         <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-home redColor"></span>
         首页
     </a>
@@ -25,13 +25,10 @@
 
 
     <span class="pull-right">
-			<a href="forebought">我的订单</a>
-			<a href="forecart">
+			<a href="${ctx}/order/myOrder">我的订单</a>
+			<a href="${ctx}/cart/getCartList">
 			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
 			购物车
-                <c:if test="!${empty cartTotalItemNumber}">
-                    <strong>${cartTotalItemNumber}</strong>件
-                </c:if>
             </a>
 		</span>
 </nav>

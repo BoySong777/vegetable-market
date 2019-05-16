@@ -11,7 +11,7 @@
 <body>
 <%@include file="../commons/com.jsp"%>
 <%@include file="../commons/head.jsp" %>
-<%@include file="../commons/order.jsp" %>
+<%@include file="../commons/order2.jsp" %>
 <%@include file="../fore/footer.jsp"%>
 </body>
 </html>

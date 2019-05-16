@@ -42,4 +42,19 @@ public class CartServiceImpl extends BaseServiceImpl<Cart> implements CartServic
         cartDao.updateGoodsNum(cart);
     }
 
+    @Override
+    public Cart queryGoodsByUserIdAndGoodsId(Cart cart) {
+        return cartDao.queryGoodsByUserIdAndGoodsId(cart);
+    }
+    @Override
+    public void create(Cart cart){
+        Cart cart1 = this.queryGoodsByUserIdAndGoodsId(cart);
+        if (cart1==null){
+            cartDao.create(cart);
+        }else {
+            cart1.setNumber(cart1.getNumber()+cart.getNumber());
+            this.updateGoodsNum(cart1);
+        }
+    }
+
 }

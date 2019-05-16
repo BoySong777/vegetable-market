@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Enumeration;
 import java.util.List;
 
 @Service
@@ -74,7 +75,10 @@ public class AdministratorServiceImpl implements AdministratorService {
 
     @Override
     public void signOut() {
-        request.getSession().invalidate();
+        Enumeration em = request.getSession().getAttributeNames();
+        while(em.hasMoreElements()){
+            request.getSession().removeAttribute(em.nextElement().toString());
+        }
     }
 
     @Override

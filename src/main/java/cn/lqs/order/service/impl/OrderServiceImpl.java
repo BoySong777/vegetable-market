@@ -61,10 +61,6 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
         return orderDao.selectGoodsByOrderId(id);
     }
 
-    @Override
-    public void removeGoodsByOrderId(String id) {
-        orderDao.removeGoodsByOrderId(id);
-    }
 
     @Override
     public Order createOrder(List<OrderGoods> goodsList, String addressId) {
@@ -114,8 +110,12 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
     }
 
     @Override
+    public void setUrge(String id) {
+        orderDao.setUrge(id);
+    }
+
+    @Override
     public void remove(String id) {
         orderDao.remove(id);
-        this.removeGoodsByOrderId(id);
     }
 }

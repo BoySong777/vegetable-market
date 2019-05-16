@@ -16,8 +16,8 @@ public interface OrderDao extends DAO<Order> {
     void createOrderGoods(OrderGoods orderGoods);
     List<Order> selectByUserId(String id);
     List<OrderGoods> selectGoodsByOrderId(String id);
-    void removeGoodsByOrderId(String id);
     void setPayed(Order order);
     void setShip(String id);
     void setFinish(Order order);
+    void setUrge(String id);
 }

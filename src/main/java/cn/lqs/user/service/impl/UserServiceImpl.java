@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.Enumeration;
 
 @Service
 public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
@@ -93,6 +94,9 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
     @Override
     public void signOut() {
-        request.getSession().invalidate();
+        Enumeration em = request.getSession().getAttributeNames();
+        while(em.hasMoreElements()){
+            request.getSession().removeAttribute(em.nextElement().toString());
+        }
     }
 }

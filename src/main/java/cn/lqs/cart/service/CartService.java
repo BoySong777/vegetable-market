@@ -9,4 +9,5 @@ public interface CartService extends BaseService<Cart>{
     List<Cart> queryByUserId(String id);
     void removeByUserId(String id);
     void updateGoodsNum(Cart cart);
+    Cart queryGoodsByUserIdAndGoodsId(Cart cart);
 }

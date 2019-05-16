@@ -17,4 +17,9 @@ public class OrderGoods extends DoMain {
     private String orderId;
     private String goodsId;
     private Integer number;
+    private String goodsName;
+    private double goodsPrice;
+    private Long categoryCode;//一级类别
+    private Long typeCode;//二级类别
+    private String avatar;
 }

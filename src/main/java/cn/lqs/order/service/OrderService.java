@@ -16,9 +16,9 @@ public interface OrderService extends BaseService<Order> {
     void createOrderGoods(OrderGoods orderGoods);
     List<Order> selectByUserId(String id);
     List<OrderGoods> selectGoodsByOrderId(String id);
-    void removeGoodsByOrderId(String id);
     Order createOrder(List<OrderGoods> goodsList,String addressId);
     void setPayed(String id);
     void setShip(String id);
     void setFinish(String id);
+    void setUrge(String id);
 }

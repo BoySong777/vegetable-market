@@ -17,22 +17,27 @@
         id,
         order_id orderId,
         goods_id goodsId,
-        `number`
+        `number`,
+        goods_name goodsName,
+        goods_price goodsPrice,
+        category_code categoryCode,
+        type_code typeCode,
+        avatar
     </sql>
     <insert id="create" parameterType="cn.lqs.order.bean.Order">
         insert into `order`(id, user_id, user_info, create_time, end_time, total_price, pay_time)
         value (#{id},#{userId},#{userInfo},#{createTime},#{endTime},#{totalPrice},#{payTime})
     </insert>
     <insert id="createOrderGoods" parameterType="cn.lqs.order.bean.OrderGoods">
-        insert into order_goods(id, order_id, goods_id, number)
-        value (#{id},#{orderId},#{goodsId},#{number})
+        insert into order_goods(id, order_id, goods_id, number, goods_name, goods_price, category_code, type_code,avatar)
+        value (#{id},#{orderId},#{goodsId},#{number},#{goodsName},#{goodsPrice},#{categoryCode},#{typeCode},#{avatar})
     </insert>
     <select id="selectByUserId" parameterType="string"
             resultType="cn.lqs.order.bean.Order">
         select <include refid="params"></include>
-        from `order` where user_id  = ${string}
+        from `order` where user_id  = #{id} and is_delete = 0 order by create_time desc
     </select>
-    <select id="queryById" parameterType="string">
+    <select id="queryById" parameterType="string" resultType="cn.lqs.order.bean.Order">
         select <include refid="params"></include>
         from `order` where id = #{string};
     </select>
@@ -40,12 +45,7 @@
         select <include refid="params2"></include>
         from order_goods where order_id = #{string}
     </select>
-    <delete id="remove" parameterType="string">
-        delete from `order` where id=#{string}
-    </delete>
-    <delete id="removeGoodsByOrderId" parameterType="string">
-        delete from order_goods where order_id = #{string}
-    </delete>
+
     <update id="setPayed">
         update `order` set status = 1,pay_time = #{payTime} where id = #{id}
     </update>
@@ -54,6 +54,12 @@
     </update>
     <update id="setFinish">
         update `order` set end_time = #{endTime},status = 3 where id = #{id}
+    </update>
+    <update id="remove" parameterType="string">
+        update `order` set is_delete = 1 where id = #{string};
+    </update>
+    <update id="setUrge" parameterType="string">
+        update `order` set urge = urge + 1 where id = #{string}
     </update>
 
 

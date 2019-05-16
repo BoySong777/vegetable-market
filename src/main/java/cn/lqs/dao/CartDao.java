@@ -13,5 +13,6 @@ public interface CartDao extends DAO<Cart> {
     List<Cart> queryByUserId(String id);
     void removeByUserId(String id);
     void updateGoodsNum(Cart cart);
+    Cart queryGoodsByUserIdAndGoodsId(Cart cart);
 
 }

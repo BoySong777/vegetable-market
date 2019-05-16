@@ -6,8 +6,13 @@
     <sql id="params">
         id,
         user_id userId,
-        goods_id,
-        `number`
+        goods_id goodsId,
+        `number`,
+        goods_name goodsName,
+        goods_price goodsPrice,
+        category_code categoryCode,
+        type_code typeCode,
+        avatar
     </sql>
     <select id="queryByUserId" parameterType="string" resultType="cn.lqs.cart.bean.Cart">
         select <include refid="params"></include>
@@ -15,7 +20,8 @@
         where user_id = #{string}
     </select>
     <insert id="create" parameterType="cn.lqs.cart.bean.Cart">
-        insert into cart(id,user_id,goods_id,`number`) value (#{id},#{userId},#{goodsId},#{number})
+        insert into cart(id, user_id, goods_id, number, goods_name, goods_price, category_code, type_code, avatar)
+         value (#{id},#{userId},#{goodsId},#{number},#{goodsName},#{goodsPrice},#{categoryCode},#{typeCode},#{avatar})
     </insert>
     <delete id="remove">
         delete from cart where id=#{id}
@@ -24,6 +30,13 @@
         delete from cart where user_id=#{id}
     </delete>
     <update id="updateGoodsNum" parameterType="cn.lqs.cart.bean.Cart">
-        update cart set `number` = #{number} where id = #{id}
+        update cart set `number` = #{number} where  user_id = #{userId} and goods_id = #{goodsId}
     </update>
+    <select id="queryGoodsByUserIdAndGoodsId" parameterType="cn.lqs.cart.bean.Cart" resultType="cn.lqs.cart.bean.Cart">
+        select <include refid="params"></include> from cart where user_id = #{userId} and goods_id = #{goodsId}
+    </select>
+    <select id="queryById" resultType="cn.lqs.cart.bean.Cart" parameterType="string">
+        select <include refid="params"></include>
+        from cart where id = #{string}
+    </select>
 </mapper>

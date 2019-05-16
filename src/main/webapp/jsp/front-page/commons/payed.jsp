@@ -21,7 +21,7 @@
 
         <div class="paedCheckLinkDiv">
             您可以
-            <a class="payedCheckLink" href="forebought">查看订单</a>
+            <a class="payedCheckLink" href="${ctx}/order/myOrder">查看订单</a>
         </div>
 
     </div>
