@@ -144,6 +144,12 @@ public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsSer
         }
         return newFileName;
     }
+
+    @Override
+    public List<Goods> queryByCategoryCode(Long code) {
+        return goodsDao.queryByCategoryCode(code);
+    }
+
     @Override
     public QueryResult<Goods> findList(Object object) {
         QueryResult<Goods> result = new QueryResult<>();

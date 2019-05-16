@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lqs.dao.OrderDao">
+    <sql id="params">
+        id,
+        user_id userId,
+        user_info userInfo,
+        create_time createTime,
+        end_time endTime,
+        total_price totalPrice,
+        pay_time payTime,
+        `status`
+    </sql>
+    <sql id="params2">
+        id,
+        order_id orderId,
+        goods_id goodsId,
+        `number`
+    </sql>
+    <insert id="create" parameterType="cn.lqs.order.bean.Order">
+        insert into `order`(id, user_id, user_info, create_time, end_time, total_price, pay_time)
+        value (#{id},#{userId},#{userInfo},#{createTime},#{endTime},#{totalPrice},#{payTime})
+    </insert>
+    <insert id="createOrderGoods" parameterType="cn.lqs.order.bean.OrderGoods">
+        insert into order_goods(id, order_id, goods_id, number)
+        value (#{id},#{orderId},#{goodsId},#{number})
+    </insert>
+    <select id="selectByUserId" parameterType="string"
+            resultType="cn.lqs.order.bean.Order">
+        select <include refid="params"></include>
+        from `order` where user_id  = ${string}
+    </select>
+    <select id="queryById" parameterType="string">
+        select <include refid="params"></include>
+        from `order` where id = #{string};
+    </select>
+    <select id="selectGoodsByOrderId" parameterType="string" resultType="cn.lqs.order.bean.OrderGoods">
+        select <include refid="params2"></include>
+        from order_goods where order_id = #{string}
+    </select>
+    <delete id="remove" parameterType="string">
+        delete from `order` where id=#{string}
+    </delete>
+    <delete id="removeGoodsByOrderId" parameterType="string">
+        delete from order_goods where order_id = #{string}
+    </delete>
+    <update id="setPayed">
+        update `order` set status = 1,pay_time = #{payTime} where id = #{id}
+    </update>
+    <update id="setShip" parameterType="string">
+        update `order` set status = 2 where id = #{string}
+    </update>
+    <update id="setFinish">
+        update `order` set end_time = #{endTime},status = 3 where id = #{id}
+    </update>
+
+
+</mapper>

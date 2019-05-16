@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix='fmt' uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -13,13 +12,30 @@
     request.setAttribute("img",img);
 %>
 <head>
+    <link rel="shortcut icon" href="${ctx}/assets/managePage/images/favicon.ico"/>
+    <link rel="bookmark" href="${ctx}/assets/managePage/images/favicon.ico"/>
     <!--bootstrap css-->
     <link rel="stylesheet" href="${ctx}/assets/css/bootstrap.min.css">
     <!-- 引入JQuery -->
-    <script type="text/javascript" src="${ctx}/assets/easyUI/jquery.min.js"></script>
+    <script type="text/javascript" src="${ctx}/assets/script/jquery.min2.js"></script>
+    <script type="text/javascript" src="${ctx}/assets/script/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="${ctx}/assets/script/jquery.json.min.js"></script>
     <!--bootstrap-->
     <script type="text/javascript" src="${ctx}/assets/script/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="${ctx}/assets/script/slide.js"></script>
+
     <link href="${ctx}/assets/css/fore/style.css" rel="stylesheet">
+
+    <!--vue-->
+    <script type="text/javascript" src="${ctx}/assets/script/vue.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/managePage/layui/css/layui.css">
+    <script src="${ctx}/assets/managePage/layui/layui.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/user-login/reset.css">
+    <link rel="stylesheet" type="text/css" href="${ctx}/assets/css/user-login/main.css">
     <script>
         function formatMoney(num){
             num = num.toString().replace(/\$|\,/g,'');

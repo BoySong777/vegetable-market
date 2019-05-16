@@ -24,4 +24,5 @@ public class Address extends DoMain {
     private String detail;
     private String phone;
     private String recipient;
+    private Integer status;
 }

@@ -78,6 +78,10 @@
         select <include refid="params"></include>
         from goods where id = #{id}
     </select>
+    <select id="queryByCategoryCode" parameterType="long" resultType="cn.lqs.goods.bean.Goods">
+        select <include refid="params"></include>
+        from goods where category_code = #{code} limit 4
+    </select>
     <insert id="create" parameterType="cn.lqs.goods.bean.Goods">
         insert into goods(id,name,category_code,type_code,price,discount,avatar,brand) value (#{id},#{name},#{categoryCode},#{typeCode},#{price},#{discount},#{avatar},#{brand})
     </insert>

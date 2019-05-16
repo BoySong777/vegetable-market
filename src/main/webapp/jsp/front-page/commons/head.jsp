@@ -3,8 +3,7 @@
   Date: 2019/5/12
   Time: 15:43
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <nav class="top ">
     <a href="${contextPath}">
@@ -15,7 +14,7 @@
     <span>hello，欢迎光临菜市场</span>
 
     <c:if test="${!empty user}">
-        <a href="">${user.account}</a>
+        <a href="${ctx}/jsp/front-page/user/userManagePage.jsp">${user.account}</a>
         <a href="${ctx}/user/signOut">退出</a>
     </c:if>
 

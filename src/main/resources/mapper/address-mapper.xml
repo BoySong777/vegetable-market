@@ -11,7 +11,16 @@
         street,
         detail,
         phone,
-        recipient
+        recipient,
+        `status`
+    </sql>
+
+    <sql id="params2">
+        id,
+        `code`,
+        `name`,
+         area,
+         town
     </sql>
 
     <select id="queryListByUserId" parameterType="string" resultType="cn.lqs.address.bean.Address">
@@ -21,5 +30,49 @@
     </select>
     <select id="queryNameByProvinceCode" parameterType="long" resultType="string">
         select name from province where code = #{code}
+    </select>
+    <select id="queryDefault" parameterType="String" resultType="cn.lqs.address.bean.Address">
+        select <include refid="params"></include>
+        from address where user_id = #{userId} and `status` = 1
+    </select>
+    <select id="queryById" parameterType="string" resultType="cn.lqs.address.bean.Address">
+        select
+        <include refid="params"></include>
+        from address where id = #{id}
+    </select>
+    <insert id="create" parameterType="cn.lqs.address.bean.Address">
+        insert into address (id, user_id, province, area, street, detail, phone, recipient)
+        values (#{id},#{userId},#{province},#{area},#{street},#{detail},#{phone},#{recipient});
+    </insert>
+    <update id="modify" parameterType="cn.lqs.address.bean.Address">
+        update address set province = #{province}, area= #{area}, street= #{street},
+                           detail= #{detail}, phone= #{phone}, recipient= #{recipient}
+                        where id = #{id}
+    </update>
+    <update id="setDefault" parameterType="string">
+        update address set `status` = 1 where id = #{string}
+    </update>
+    <update id="resetDefault" parameterType="string">
+        update address set `status` = 0 where user_id = #{string}
+    </update>
+    <delete id="remove" parameterType="string">
+        delete from address where id=#{id}
+    </delete>
+    <select id="getProvince" resultType="cn.lqs.address.bean.Province" >
+        select <include refid="params2"></include>
+        from province where area = '0'
+    </select>
+    <select id="getArea"  resultType="cn.lqs.address.bean.Province">
+        select <include refid="params2"></include>
+        from province where area != '0' and town = '0'
+    </select>
+    <select id="getTwon" resultType="cn.lqs.address.bean.Province" parameterType="string">
+        select <include refid="params2"></include>
+        from province where town != '0' and area = #{areaCode}
+    </select>
+    <select id="queryProvinceByCode"  resultType="cn.lqs.address.bean.Province" parameterType="long">
+        select
+        <include refid="params2"></include>
+        from province where `code` = #{code}
     </select>
 </mapper>

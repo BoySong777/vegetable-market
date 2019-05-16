@@ -5,6 +5,7 @@
  */
 package cn.lqs.user.controller;
 
+import cn.lqs.base.BaseController;
 import cn.lqs.user.bean.User;
 import cn.lqs.user.bean.UserVo;
 import cn.lqs.user.service.UserService;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("user")
-public class UserController {
+public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
@@ -116,5 +117,20 @@ public class UserController {
     private String signOut(){
         userService.signOut();
         return "redirect:/index.jsp";
+    }
+    @RequestMapping("checkLogin")
+    @ResponseBody
+    private Object checkLogin(){
+        Map<String,Object> map = new HashMap<>();
+        User user = (User) session.getAttribute("user");
+        if(user!=null){
+            String id = user.getId();
+            map.put("userId",id);
+            map.put("result","success");
+        }else{
+            map.put("result","fail");
+        }
+
+        return map;
     }
 }
