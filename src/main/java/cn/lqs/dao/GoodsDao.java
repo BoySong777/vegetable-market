@@ -16,4 +16,5 @@ public interface GoodsDao extends DAO<Goods> {
     void createDetail(GoodsDetail goodsDetail);
     void modifyDetail(GoodsDetail goodsDetail);
     List<Goods> queryByCategoryCode(Long code);
+    void updateStock(Goods goods);
 }

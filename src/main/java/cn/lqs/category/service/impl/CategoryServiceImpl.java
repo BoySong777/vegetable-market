@@ -35,4 +35,9 @@ public class CategoryServiceImpl extends BaseServiceImpl<Category> implements Ca
     public List<Category> queryListSecondCategory(long code) {
         return categoryDao.queryListSecondCategory(code);
     }
+
+    @Override
+    public String queryNameByCode(long code) {
+        return categoryDao.queryNameByCode(code);
+    }
 }

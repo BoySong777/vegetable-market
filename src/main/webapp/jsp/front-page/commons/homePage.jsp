@@ -20,9 +20,9 @@
 
             <div class="rightMenu">
 
-                <c:forEach items="${cs}" var="c">
+                <c:forEach items="${fistCategory}" var="c">
                     <span>
-                        <a href="forecategory?cid=${c.id}">
+                        <a href="${ctx}/goods/searchFirstCategory/${c.code}">
                                 ${c.name}
                         </a>
                     </span>
@@ -39,12 +39,12 @@
 
     <div class="center_con clearfix">
         <ul class="subnav fl">
-            <li><a href="#model01" class="fruit">新鲜水果</a></li>
-            <li><a href="#model02" class="seafood">海鲜水产</a></li>
-            <li><a href="#model03" class="meet">猪牛羊肉</a></li>
-            <li><a href="#model04" class="egg">禽类蛋品</a></li>
-            <li><a href="#model05" class="vegetables">新鲜蔬菜</a></li>
-            <li><a href="#model06" class="ice">速冻食品</a></li>
+            <li><a href="#a1007" class="fruit">新鲜水果</a></li>
+            <li><a href="#a1003" class="seafood">海鲜水产</a></li>
+            <li><a href="#a1002" class="meet">猪牛羊肉</a></li>
+            <li><a href="#a1002" class="egg">禽类蛋品</a></li>
+            <li><a href="#a1001" class="vegetables">新鲜蔬菜</a></li>
+            <li><a href="#a1010" class="ice">当日熟食</a></li>
         </ul>
         <div class="slide fl">
             <ul class="slide_pics">
@@ -65,14 +65,14 @@
     <c:forEach items="${categoryList}" var="category">
         <div class="list_model">
             <div class="list_title clearfix">
-                <h3 class="fl" id="model01">${category.name}</h3>
+                <h3 class="fl" id="a${category.code}">${category.name}</h3>
                 <div class="subtitle fl">
                     <span>|</span>
                     <c:forEach items="${typeListMap[category.code]}" var="type">
-                        <a href="#">${type.name}</a>
+                        <a href="${ctx}/goods/searchSecondCategory/${category.code}/${type.code}">${type.name}</a>
                     </c:forEach>
                 </div>
-                <a href="#" class="goods_more fr" id="fruit_more">查看更多 ></a>
+                <a href="${ctx}/goods/searchFirstCategory/${category.code}" class="goods_more fr" id="fruit_more">查看更多 ></a>
             </div>
 
             <div class="goods_con clearfix">

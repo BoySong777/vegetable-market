@@ -14,4 +14,6 @@ public interface UserService extends BaseService<User> {
     void updatePassword(User user);
     String setTokenById(String id,String email);
     void signOut();
+    Boolean verifyPwdIsTrue(User user);
+    void updatePwd(User user);
 }

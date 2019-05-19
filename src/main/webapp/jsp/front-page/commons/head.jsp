@@ -7,7 +7,7 @@
 
 <nav class="top ">
     <a href="${ctx}">
-        <span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-home redColor"></span>
+        <span style="color:green;margin:0px" class=" glyphicon glyphicon-home redColor"></span>
         首页
     </a>
 
@@ -27,7 +27,7 @@
     <span class="pull-right">
 			<a href="${ctx}/order/myOrder">我的订单</a>
 			<a href="${ctx}/cart/getCartList">
-			<span style="color:#C40000;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
+			<span style="color:green;margin:0px" class=" glyphicon glyphicon-shopping-cart redColor"></span>
 			购物车
             </a>
 		</span>

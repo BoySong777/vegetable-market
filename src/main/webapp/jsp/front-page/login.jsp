@@ -18,7 +18,7 @@
 <div class="login_form_bg">
     <div class="login_form_wrap clearfix">
         <div class="login_banner fl"></div>
-        <div class="slogan fl">日夜兼程 · 急速送达</div>
+        <div class="slogan fl">绿色健康 · 安全放心</div>
         <div class="login_form fr">
             <div class="login_title clearfix">
                 <h1>用户登录</h1>

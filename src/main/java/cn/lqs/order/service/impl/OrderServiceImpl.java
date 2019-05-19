@@ -15,8 +15,10 @@ import cn.lqs.goods.bean.Goods;
 import cn.lqs.goods.service.GoodsService;
 import cn.lqs.order.bean.Order;
 import cn.lqs.order.bean.OrderGoods;
+import cn.lqs.order.bean.OrderVo;
 import cn.lqs.order.service.OrderService;
 import cn.lqs.user.bean.User;
+import cn.lqs.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,9 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
 
     @Autowired
     private GoodsService goodsService;
+
+    @Autowired
+    private UserService userService;
 
 
     @Override
@@ -78,7 +83,9 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
         for (OrderGoods orderGoods : goodsList) {
             goods = goodsService.queryById(orderGoods.getGoodsId());
             totalPrice += goods.getPrice() * orderGoods.getNumber();
+            goods.setStock(goods.getStock()-orderGoods.getNumber());
             orderGoods.setOrderId(order.getId());
+            goodsService.updateStock(goods);
             orderDao.createOrderGoods(orderGoods);
         }
         order.setTotalPrice(totalPrice);
@@ -117,5 +124,21 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
     @Override
     public void remove(String id) {
         orderDao.remove(id);
+    }
+
+    @Override
+    public List<Order> queryList(Object object){
+        List<Order> orderList = orderDao.queryList(object);
+        if(object==null){
+            System.out.println("object参数为空！");
+        }
+
+        //System.out.println("查询订单打印参数："+(OrderVo)object);
+        for(Order order:orderList){
+            User user = userService.queryById(order.getUserId());
+            order.setUserName(user.getAccount());
+        }
+        System.out.println("存入user后打印订单查询结果："+orderList);
+        return orderList;
     }
 }

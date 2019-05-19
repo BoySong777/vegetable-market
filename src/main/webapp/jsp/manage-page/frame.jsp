@@ -27,12 +27,8 @@
     <div class="menu">
         <ul>
             <li>
-                <a class="menuFA" href="javascript:void(0)" onclick="menuCAClick('tgls/qdAPI.html',this)"><i
-                        class="iconfont icon-zhishi left"></i>实时状况</a>
-            </li>
-            <li>
-                <a class="menuFA" href="javascript:void(0)" onclick="menuCAClick('tgls/iconfont.html',this)"><i
-                        class="iconfont icon-huojian left"></i>iconfont字体库</a>
+                <a class="menuFA" href="javascript:void(0)" onclick="menuCAClick('index.jsp',this)"><i
+                        class="iconfont icon-zhishi left"></i>首页</a>
             </li>
             <li>
                 <a class="menuFA" href="javascript:void(0)"><i
@@ -41,16 +37,19 @@
                 <dl>
                     <dt><a href="javascript:void(0)" onclick="menuCAClick('user/list.jsp',this)">用户列表</a>
                     </dt>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('user/analysis.jsp',this)">用户分析</a>
-                    </dt>
+                    <%--<dt><a href="javascript:void(0)" onclick="menuCAClick('user/analysis.jsp',this)">用户分析</a>
+                    </dt>--%>
                 </dl>
             </li>
             <li>
                 <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-shangpin left"></i>商品管理<i
                         class="iconfont icon-dajiantouyou right"></i></a>
                 <dl>
+<%--
                     <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/goodsManage/goodsType_list.html',this)">分类列表</a>
                     </dt>
+--%>
+
                     <dt><a href="javascript:void(0)" onclick="menuCAClick('goods/list.jsp',this)">商品列表</a>
                     </dt>
                     <dt><a href="javascript:void(0)"
@@ -58,33 +57,12 @@
                 </dl>
             </li>
             <li>
-                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-yunying left"></i>用户管理<i
-                        class="iconfont icon-dajiantouyou right"></i></a>
-                <dl>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('user/list.jsp',this)">用户列表</a>
-                    </dt>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('user/analysis.jsp',this)">用户统计</a>
-                    </dt>
-                    <dt><a href="javascript:void(0)"
-                           onclick="menuCAClick('tgls/base/base_customList.html',this)">可新增的列表</a></dt>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/base/base_customNewList.html',this)">可新增的列表(手写)</a>
-                    </dt>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/base/pages.html',this)">页签切换Table</a>
-                    </dt>
-                    <dt><a href="javascript:void(0)" onclick="menuCAClick('tgls/base/maintain.html',this)">维护中页面</a>
-                    </dt>
-                </dl>
-            </li>
-            <li>
-                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-icon left"></i>打印模板<i
+                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-icon left"></i>订单管理<i
                         class="iconfont icon-dajiantouyou right"></i></a>
                 <dl>
                     <dt><a href="javascript:void(0)"
-                           onclick="menuCAClick('tgls/print/outPrintData.html',this)">入库单打印模版</a></dt>
+                           onclick="menuCAClick('order/list.jsp',this)">订单列表</a></dt>
                 </dl>
-            </li>
-            <li>
-                <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-caiwu left"></i>财务管理</a>
             </li>
             <li>
                 <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-ai-wallet left"></i>员工管理<i

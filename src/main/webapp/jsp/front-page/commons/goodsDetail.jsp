@@ -53,10 +53,10 @@
             </div>
         </div>
 
-        <div class="productSaleAndReviewNumber">
+        <%--<div class="productSaleAndReviewNumber">
             <div>销量 <span class="redColor boldWord"> 0</span></div>
             <div>累计评价 <span class="redColor boldWord"> 0</span></div>
-        </div>
+        </div>--%>
         <div class="productNumber">
             <span>数量</span>
             <span>
@@ -139,7 +139,7 @@
 <div class="productDetailDiv" >
     <div class="productDetailTopPart">
         <a href="#nowhere" class="productDetailTopPartSelectedLink selected">商品详情</a>
-        <a href="#nowhere" class="productDetailTopReviewLink">累计评价 <span class="productDetailTopReviewLinkNumber">0</span> </a>
+        <%--<a href="#nowhere" class="productDetailTopReviewLink">累计评价 <span class="productDetailTopReviewLinkNumber">0</span> </a>--%>
     </div>
 
 
@@ -149,6 +149,7 @@
         <div class="productParamterList">
             <span>规格: ${detailPageGoodsDetail.specification} </span>
             <span>保质期: ${detailPageGoodsDetail.shelfLife} </span>
+            <span>食用方法: ${detailPageGoodsDetail.edibleMethod} </span>
         </div>
         <div style="clear:both"></div>
     </div>

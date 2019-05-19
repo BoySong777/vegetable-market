@@ -14,15 +14,15 @@ import cn.lqs.goods.bean.Goods;
 import cn.lqs.goods.service.GoodsService;
 import cn.lqs.order.bean.Order;
 import cn.lqs.order.bean.OrderGoods;
+import cn.lqs.order.bean.OrderVo;
 import cn.lqs.order.service.OrderService;
 import cn.lqs.user.bean.User;
+import cn.lqs.user.bean.UserVo;
+import cn.lqs.util.QueryResult;
 import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -97,6 +97,10 @@ public class OrderController extends BaseController {
     }
     @RequestMapping("findOrderList/{userId}")
     private String findOrderList(@PathVariable String userId){
+        User user = (User) session.getAttribute("user");
+        if(user==null){
+            return "redirect:/jsp/front-page/login.jsp";
+        }
         List<Order> orderList = orderService.selectByUserId(userId);
         Map<String,List<OrderGoods>> orderGoodsMapperList = new HashMap<>();
         Map<String,List<Goods>> goodsMapperList = new HashMap<>();
@@ -123,14 +127,6 @@ public class OrderController extends BaseController {
         session.setAttribute("totalGoodsPrice",order.getTotalPrice());
         return  "front-page/goods/payPage";
     }
-    @RequestMapping("receipted/{orderId}")
-    @ResponseBody
-    public Object receipted(@PathVariable String orderId){
-        Map<String,Object> map = new HashMap<>();
-        orderService.setFinish(orderId);
-        map.put("msg","success");
-        return map;
-    }
     @RequestMapping("myOrder")
     public String myOrder(){
         User user = (User) session.getAttribute("user");
@@ -154,5 +150,32 @@ public class OrderController extends BaseController {
         orderService.setUrge(orderId);
         return "success";
     }
+    @RequestMapping("receipt")
+    @ResponseBody
+    public String receipt(String orderId){
+        orderService.setFinish(orderId);
+        return "success";
+    }
+
+    @RequestMapping(value = "queryList",method = RequestMethod.POST)
+    @ResponseBody
+    private Object queryList(@RequestBody OrderVo orderVo){
+        System.out.println("打印输出订单参数："+orderVo);
+        Map<String,Object> map = new HashMap<>();
+        QueryResult<Order> queryResult = new QueryResult<Order>();
+        queryResult = orderService.findList(orderVo);
+        map.put("code",0);
+        map.put("msg","");
+        map.put("count",queryResult.getTotal());
+        map.put("data",queryResult.getRows());
+        return map;
+    }
+    @RequestMapping(value = "setShip/{orderId}",method = RequestMethod.GET)
+    @ResponseBody
+    public String setShip(@PathVariable String orderId){
+        orderService.setShip(orderId);
+        return "success";
+    }
+
 
 }

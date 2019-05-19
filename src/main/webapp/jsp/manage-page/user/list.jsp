@@ -50,9 +50,9 @@
 </script>
 <script type="text/html" id="userAvatar">
     {{#  if(d.avatar==null ||d.avatar==""){ }}
-    <img src="${img}user/default.png">
+    <img height="40px" width="40px" src="${img}user/default.png">
     {{#  } else { }}
-    <img src="${img}user/{{d.avatar}}.png">
+    <img height="40px" width="40px"  src="${img}user/{{d.avatar}}">
     {{#  } }}
 </script>
 <script type="text/html" id="userAddress">

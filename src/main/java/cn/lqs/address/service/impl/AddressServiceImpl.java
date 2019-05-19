@@ -91,6 +91,9 @@ public class AddressServiceImpl extends BaseServiceImpl<Address> implements Addr
         return address;
     }
     private Address transform(Address address){
+        if(address==null){
+            return null;
+        }
         address.setAreaName(addressDao.queryNameByProvinceCode(address.getArea()));
         address.setProvinceName(addressDao.queryNameByProvinceCode(address.getProvince()));
         address.setStreetName(addressDao.queryNameByProvinceCode(address.getStreet()));

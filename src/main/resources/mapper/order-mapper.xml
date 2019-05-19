@@ -61,6 +61,43 @@
     <update id="setUrge" parameterType="string">
         update `order` set urge = urge + 1 where id = #{string}
     </update>
+    <select id="queryList"  parameterType="cn.lqs.order.bean.OrderVo" resultType="cn.lqs.order.bean.Order">
+        select <include refid="params"></include>
+        from `order`
+        where 1=1
+        <if test="goodsOrder.status!=null and goodsOrder.status &lt; 4">
+            and `status` = #{goodsOrder.status}
+        </if>
+        <if test="startTime!=null">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!=null">
+            and create_time &lt;= #{endTime}
+        </if>
+        <if test="searchId!=null and searchId!=''">
+            and id = #{searchId}
+        </if>
+        order by create_time desc
+        <if test="pagingFlag==true">
+            limit #{startIndex},#{rowCount}
+        </if>
+    </select>
+    <select id="countModelNum" resultType="integer">
+        select count(1)
+        from `order` where 1=1
+        <if test="goodsOrder.status!=null and goodsOrder.status &lt; 4">
+            and `status` = #{goodsOrder.status}
+        </if>
+        <if test="startTime!=null">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime!=null">
+            and create_time &lt;= #{endTime}
+        </if>
+        <if test="searchId!=null and searchId!=''">
+            and id = #{searchId}
+        </if>
+    </select>
 
 
 </mapper>

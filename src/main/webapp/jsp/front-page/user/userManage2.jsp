@@ -20,6 +20,7 @@
         <ul>
             <li><a href="userManagePage.jsp">· 个人信息</a></li>
             <li><a href="userAddressPage.jsp"  class="active">· 收货地址</a></li>
+            <li><a href="userPasswordPage.jsp">· 修改密码</a></li>
         </ul>
     </div>
     <div class="right_content clearfix">

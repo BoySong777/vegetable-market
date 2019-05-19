@@ -31,10 +31,10 @@
             and name like concat(#{goods.name},'%')
         </if>
         <if test="goods.categoryCode!=null">
-            and category_code like concat(#{goods.categoryCode},'%')
+            and category_code = #{goods.categoryCode}
         </if>
         <if test="goods.typeCode!=null">
-            and type_code like concat(#{goods.typeCode},'%')
+            and type_code = #{goods.typeCode}
         </if>
         <if test="goods.brand!=null and goods.brand!=''">
             and brand like concat(#{goods.brand},'%')
@@ -56,10 +56,10 @@
             and name like concat(#{goods.name},'%')
         </if>
         <if test="goods.categoryCode!=null">
-            and category_code like concat(#{goods.categoryCode},'%')
+            and category_code = #{goods.categoryCode}
         </if>
         <if test="goods.typeCode!=null">
-            and type_code like concat(#{goods.typeCode},'%')
+            and type_code = #{goods.typeCode}
         </if>
         <if test="goods.brand!=null and goods.brand!=''">
             and brand like concat(#{goods.brand},'%')
@@ -107,6 +107,9 @@
         </if>
          specification = #{specification},shelf_life = #{shelfLife},
           edible_method = #{edibleMethod},details = #{details},
-          `description` = #{description}
+          `description` = #{description} where id = #{id}
+    </update>
+    <update id="updateStock" parameterType="cn.lqs.goods.bean.Goods">
+        update goods set stock = #{stock} where id= #{id}
     </update>
 </mapper>

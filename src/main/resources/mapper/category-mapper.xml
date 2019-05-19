@@ -32,4 +32,7 @@
     <update id="modify" parameterType="cn.lqs.category.bean.Category">
         update category set name = #{name} where id = #{id}
     </update>
+    <select id="queryNameByCode" parameterType="long" resultType="string">
+        select name from category where code = #{long}
+    </select>
 </mapper>

@@ -1,17 +1,12 @@
 <%--
   User: LiQingsong
   Date: 2019/5/15
-  Time: 14:01
+  Time: 17:10
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>购买</title>
-</head>
-<body>
-<%@include file="../commons/com.jsp"%>
+
+<%@include file="../commons/com.jsp" %>
+
 <%@include file="../commons/head.jsp" %>
-<%@include file="../commons/order2.jsp" %>
+<%@include file="passwordManage.jsp" %>
 <%@include file="../commons/footer.jsp"%>
-</body>
-</html>

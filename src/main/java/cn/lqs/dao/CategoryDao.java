@@ -15,4 +15,6 @@ public interface CategoryDao extends DAO<Category> {
     List<Category> queryListSecondCategory(long code);
 
     String selectNameByCode(long code);
+
+    String queryNameByCode(long code);
 }

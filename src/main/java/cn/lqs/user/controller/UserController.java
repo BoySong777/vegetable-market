@@ -104,6 +104,7 @@ public class UserController extends BaseController {
         map.put("isTrue",isTure);
         return map;
     }
+    //这个应该是没用的，下边还有一个修改密码的方法
     @RequestMapping(value = "updatePwd",method = RequestMethod.POST)
     @ResponseBody
     private Object udatePwd(@RequestBody User user){
@@ -116,7 +117,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "signOut",method = RequestMethod.GET)
     private String signOut(){
         userService.signOut();
-        return "redirect:/index.jsp";
+        return "redirect:/index";
     }
     @RequestMapping("checkLogin")
     @ResponseBody
@@ -132,5 +133,34 @@ public class UserController extends BaseController {
         }
 
         return map;
+    }
+    @RequestMapping(value = "updateUser",method = RequestMethod.POST)
+    @ResponseBody
+    private Object udateUser(@RequestBody User user){
+        User user1 = (User) session.getAttribute("user");
+        if(user==null){
+            return "fail";
+        }
+        user.setId(user1.getId());
+        userService.modify(user);
+        user1 = userService.queryById(user1.getId());
+        session.setAttribute("user",user1);
+        return "success";
+    }
+    @RequestMapping(value = "updateUserPassword",method = RequestMethod.POST)
+    @ResponseBody
+    private Object updateUserPassword(@RequestBody Map map){
+        User user = (User) session.getAttribute("user");
+        if(user==null){
+            return "fail";
+        }
+        user.setPassword((String) map.get("oldPwd"));
+        boolean data = userService.verifyPwdIsTrue(user);
+        if(data){
+            user.setPassword((String) map.get("newPwd"));
+            userService.updatePwd(user);
+            return "success";
+        }
+        return "notTrue";
     }
 }

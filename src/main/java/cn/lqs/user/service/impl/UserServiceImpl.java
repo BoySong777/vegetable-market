@@ -99,4 +99,20 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
             request.getSession().removeAttribute(em.nextElement().toString());
         }
     }
+
+    @Override
+    public Boolean verifyPwdIsTrue(User user) {
+        int num = userDao.verifyPwdIsTrue(user);
+        if(num>0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public void updatePwd(User user) {
+        userDao.updatePassword(user);
+        session.removeAttribute("user");
+    }
 }

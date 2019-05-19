@@ -11,4 +11,7 @@ public interface UserDao extends DAO<User> {
     String selectIdByMail(String email);
     void updatePassword(User user);
     void setTokenById(User user);
+    Integer verifyPwdIsTrue(User user);
+    void updatePwd(User user);
+
 }

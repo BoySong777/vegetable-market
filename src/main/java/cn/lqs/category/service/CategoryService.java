@@ -9,4 +9,6 @@ public interface CategoryService extends BaseService<Category> {
     List<Category> queryListFirstCategory();
 
     List<Category> queryListSecondCategory(long code);
+
+    String queryNameByCode(long code);
 }

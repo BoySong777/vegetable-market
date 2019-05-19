@@ -151,6 +151,11 @@ public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsSer
     }
 
     @Override
+    public void updateStock(Goods goods) {
+        goodsDao.updateStock(goods);
+    }
+
+    @Override
     public QueryResult<Goods> findList(Object object) {
         QueryResult<Goods> result = new QueryResult<>();
         List<Goods> goodsList = dao.queryList(object);

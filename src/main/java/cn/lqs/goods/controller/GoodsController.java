@@ -128,4 +128,49 @@ public class GoodsController extends BaseController {
 
         return "front-page/goods/goodsDetailPage";
     }
+
+    @RequestMapping("searchGoods")
+    private String searchGoods(String searchValue){
+        this.removeCategoryUtil();
+        GoodsVo goodsVo = new GoodsVo();
+        goodsVo.setPagingFlag(false);
+        goodsVo.getGoods().setName(searchValue);
+        List<Goods> searchGoodsList  = goodsService.queryList(goodsVo);
+        session.setAttribute("searchGoodsList",searchGoodsList);
+        return "front-page/goods/searchPage";
+    }
+    @RequestMapping("searchFirstCategory/{firstCategory}")
+    private String searchFirstCategory(@PathVariable Long firstCategory){
+        this.removeCategoryUtil();
+        GoodsVo goodsVo = new GoodsVo();
+        goodsVo.setPagingFlag(false);
+        goodsVo.getGoods().setCategoryCode(firstCategory);
+        List<Goods> searchGoodsList  = goodsService.queryList(goodsVo);
+        String firstCategoryName = categoryService.queryNameByCode(firstCategory);
+        session.setAttribute("searchGoodsList",searchGoodsList);
+        session.setAttribute("searchFirstCategory",firstCategoryName);
+        return "front-page/goods/searchPage";
+    }
+
+    @RequestMapping("searchSecondCategory/{firstCategory}/{typeCode}")
+    private String searchSecondCategory(@PathVariable Long firstCategory,@PathVariable Long typeCode){
+        this.removeCategoryUtil();
+        GoodsVo goodsVo = new GoodsVo();
+        goodsVo.setPagingFlag(false);
+        goodsVo.getGoods().setTypeCode(typeCode);
+        goodsVo.getGoods().setCategoryCode(firstCategory);
+        System.out.println("查询条件goodsVo："+goodsVo);
+        List<Goods> searchGoodsList  = goodsService.queryList(goodsVo);
+        String firstCategoryName = categoryService.queryNameByCode(firstCategory);
+        String typeCodeName = categoryService.queryNameByCode(typeCode);
+        session.setAttribute("searchGoodsList",searchGoodsList);
+        session.setAttribute("searchFirstCategory",firstCategoryName);
+        session.setAttribute("searchSecondCategory",typeCodeName);
+        return "front-page/goods/searchPage";
+    }
+
+    private void removeCategoryUtil(){
+        session.removeAttribute("searchFirstCategory");
+        session.removeAttribute("searchSecondCategory");
+    }
 }

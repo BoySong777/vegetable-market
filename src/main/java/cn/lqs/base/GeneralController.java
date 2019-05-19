@@ -47,8 +47,8 @@ public class GeneralController extends BaseController {
         session.setAttribute("goodsListMap", goodsListMap);
         session.setAttribute("typeListMap", typeListMap);
         List<Category> fistCategory = categoryService.queryListFirstCategory();
-        session.setAttribute("cs", fistCategory);
+        session.setAttribute("fistCategory", fistCategory);
         System.out.println("真的是走这个方法了。");
-        return "redirect:/index.jsp";
+        return "redirect:/newIndex.jsp";
     }
 }

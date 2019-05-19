@@ -89,4 +89,13 @@
     <delete id="remove" parameterType="string">
         delete from user where id=#{id}
     </delete>
+    <update id="modify" parameterType="cn.lqs.user.bean.User">
+        update user set sex = #{sex},phone = #{phone} where id=#{id}
+    </update>
+    <select id="verifyPwdIsTrue" parameterType="cn.lqs.user.bean.User" resultType="integer">
+        select count(1) from user where id = #{id} and password = #{password}
+    </select>
+    <select id="updatePwd" parameterType="cn.lqs.user.bean.User">
+        update user set password = #{password} where id = #{id}
+    </select>
 </mapper>

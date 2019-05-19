@@ -6,6 +6,7 @@
 package cn.lqs.order.bean;
 
 import cn.lqs.base.DoMain;
+import cn.lqs.user.bean.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.ToString;
@@ -18,6 +19,7 @@ import java.util.Date;
 @Component
 public class Order extends DoMain {
     private String userId;
+    private String userName;
     private String userInfo;
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date createTime;
@@ -30,6 +32,9 @@ public class Order extends DoMain {
     private String statusName;
 
     public String getStatusName() {
+        if(status==null){
+            return statusName;
+        }
        if(status==1){
            statusName = "未发货";
        }else if(status==0){

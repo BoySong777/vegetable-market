@@ -15,4 +15,5 @@ public interface GoodsService extends BaseService<Goods> {
     GoodsDetail queryDetail(String goodsId);
     String dealUpload(MultipartFile file);
     List<Goods> queryByCategoryCode(Long code);
+    void updateStock(Goods goods);
 }
