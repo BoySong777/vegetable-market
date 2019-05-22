@@ -80,7 +80,7 @@
     </select>
     <select id="queryByCategoryCode" parameterType="long" resultType="cn.lqs.goods.bean.Goods">
         select <include refid="params"></include>
-        from goods where category_code = #{code} limit 4
+        from goods where stock&gt;0 and is_delete=0 and category_code = #{code} limit 4
     </select>
     <insert id="create" parameterType="cn.lqs.goods.bean.Goods">
         insert into goods(id,name,category_code,type_code,price,discount,avatar,brand,stock,feature,search_sign) value (#{id},#{name},#{categoryCode},#{typeCode},#{price},#{discount},#{avatar},#{brand},#{stock},#{feature},#{searchSign})
@@ -114,28 +114,28 @@
     <select id="searchLikeGoodsName" parameterType="string"
             resultType="cn.lqs.goods.bean.Goods">
         select <include refid="params"></include>
-        from goods where `name` like concat(#{string},'%');
+        from goods where stock&gt;0 and is_delete=0 and  `name` like concat(#{string},'%');
     </select>
     <select id="searchByCategory" parameterType="long"
             resultType="cn.lqs.goods.bean.Goods">
         select <include refid="params"></include>
-        from goods where category_code = #{long};
+        from goods where  stock&gt;0 and is_delete=0 and category_code = #{long};
     </select>
     <select id="searchByType" parameterType="long"
             resultType="cn.lqs.goods.bean.Goods">
         select <include refid="params"></include>
-        from goods where type_code = #{long};
+        from goods where  stock&gt;0 and is_delete=0 and type_code = #{long};
     </select>
     <select id="searchBySearchSign" parameterType="string"
             resultType="cn.lqs.goods.bean.Goods">
         select <include refid="params"></include>
-        from goods where search_sign like concat(concat('%',#{string}),'%')
+        from goods where  stock&gt;0 and  is_delete=0 and search_sign like  concat(concat('%',#{string}),'%')
     </select>
     <select id="queryNeedAddGoodsNum" resultType="integer">
         select count(1) from goods where stock &lt;= 10
     </select>
     <select id="queryByAd" parameterType="map" resultType="cn.lqs.goods.bean.Goods">
-        select <include refid="params"></include> from goods where category_code = #{category} and feature = #{feature}
+        select <include refid="params"></include> from goods where stock&gt;0 and is_delete=0 and category_code = #{category} and feature = #{feature}
     </select>
     <update id="updateSales" parameterType="cn.lqs.goods.bean.GoodsDetail" >
         update goods_detail set sales = #{sales} where goods_id = #{goodsId}

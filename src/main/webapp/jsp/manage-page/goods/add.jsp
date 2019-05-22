@@ -91,14 +91,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">品牌</label>
             <div class="layui-input-block">
-                <input type="text" name="brand" required lay-verify="required" autocomplete="off" placeholder="请输入商品品牌"
+                <input value="河南" type="text" name="brand" required lay-verify="required" autocomplete="off" placeholder="请输入商品品牌"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">规格</label>
             <div class="layui-input-block">
-                <input type="text" name="specification" required lay-verify="required" autocomplete="off"
+                <input value="5000g" type="text" name="specification" required lay-verify="required" autocomplete="off"
                        placeholder="请输入商品规格"
                        class="layui-input">
             </div>
@@ -106,14 +106,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">库存</label>
             <div class="layui-input-inline">
-                <input type="number" name="stock" required lay-verify="required" autocomplete="off" placeholder="请输入库存"
+                <input value="30" type="number" name="stock" required lay-verify="required" autocomplete="off" placeholder="请输入库存"
                        class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">保质期(天)</label>
             <div class="layui-input-inline">
-                <input type="number" name="shelfLife" required lay-verify="required" autocomplete="off"
+                <input value="360" type="number" name="shelfLife" required lay-verify="required" autocomplete="off"
                        placeholder="请输入保质期"
                        class="layui-input">
             </div>
@@ -121,7 +121,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">使用方法</label>
             <div class="layui-input-block">
-                <input type="text" name="edibleMethod" required lay-verify="required" autocomplete="off"
+                <input value="用于炒菜，炸制食品等" type="text" name="edibleMethod" required lay-verify="required" autocomplete="off"
                        placeholder="请输入商品使用方法"
                        class="layui-input">
             </div>
@@ -129,7 +129,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">商品搜索标签</label>
             <div class="layui-input-block">
-                <input type="text" name="searchSign" autocomplete="off"
+                <input value="油 食用油 植物油 健康 养生食品 " type="text" name="searchSign" autocomplete="off"
                        placeholder="每一个标签使用空格作为分割"
                        class="layui-input">
             </div>
@@ -140,13 +140,13 @@
             <div class="layui-input-block">
                            
                 <button type="button" class="layui-btn" id="detailImgs" style="margin: 10px">
-                                    <i class="layui-icon">&#xe67c;</i>选择图片
+                                    <i class="layui-icon">&#xe67c;</i>选择
                                
                 </button>
                            
-                <button type="button" class="layui-btn" id="test9">开始上传</button>
+                <button type="button" class="layui-btn" id="test9">上传</button>
                            
-                <button type="button" class="layui-btn" id="cleanImgs">清空预览图片
+                <button type="button" class="layui-btn" id="cleanImgs">清空预览
                 </button>
                        
             </div>

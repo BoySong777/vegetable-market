@@ -57,10 +57,14 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">折扣</label>
+            <label class="layui-form-label">商品特征</label>
             <div class="layui-input-inline">
-                <input type="number" name="discount" autocomplete="off" placeholder="请输入折扣"
-                       class="layui-input">
+                <select name="feature" required lay-verify="required" id="feature" lay-filter="feature" disabled>
+                    <option value="0">无设置</option>
+                    <option value="1">价格便宜型</option>
+                    <option value="2">经济实惠型</option>
+                    <option value="3">新鲜上市型</option>
+                </select>
             </div>
         </div>
         <%--<div class="layui-form-item">
@@ -122,26 +126,18 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">描述</label>
-            <div class="layui-input-block">
-                <input type="text" name="description"  autocomplete="off"
-                       placeholder="请输入商品描述，可不写"
-                       class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
                     <label class="layui-form-label">商品图片上传</label>
                    
             <div class="layui-input-block">
                            
-                <button type="button" class="layui-btn" id="detailImgs" style="margin: 10px">
-                                    <i class="layui-icon">&#xe67c;</i>选择图片
+                <button type="button" class="layui-btn" id="detailImgs" >
+                                    <i class="layui-icon">&#xe67c;</i>选择
                                
                 </button>
                            
-                <button type="button" class="layui-btn" id="test9">开始上传</button>
+                <button type="button" class="layui-btn" id="test9">上传</button>
                            
-                <button type="button" class="layui-btn" id="cleanImgs">清空预览图片
+                <button type="button" class="layui-btn" id="cleanImgs">清空预览
                 </button>
                        
             </div>
@@ -227,14 +223,12 @@
                                 "categoryCode":data.goods.categoryCode,
                                 "typeCode":data.goods.typeCode,
                                 "price":data.goods.price,
-                                "discount":data.goods.discount,
+                                "feature":data.goods.feature,
                                 "brand":data.goods.brand,
                                 "stock":data.goods.stock,
                                 "specification":data.goodsDetail.specification,
                                 "shelfLife":data.goodsDetail.shelfLife,
-                                "edibleMethod":data.goodsDetail.edibleMethod,
-                                "details":data.goodsDetail.details,
-                                "description":data.goodsDetail.description
+                                "edibleMethod":data.goodsDetail.edibleMethod
                             });
                         }
                     });

@@ -81,14 +81,19 @@
                     <th lay-data="{field:'detail', width:260}">详细地址</th>
                     <th lay-data="{field:'recipient', width:100}">收件人</th>
                     <th lay-data="{field:'phone', width:130}">手机号</th>
-                    <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}">操作</th>
+                    <th lay-data="{fixed: 'right', width:178, align:'center', templet:'#addressOperate'}">操作</th>
                 </tr>
                 </thead>
             </table>
 
-            <script type="text/html" id="barDemo">
+            <script type="text/html" id="addressOperate">
+                {{#  if(d.status==1){ }}
+                <a href="javascript:void(0)">默认地址&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                {{#  } else { }}
                 <a class="layui-btn layui-btn-xs" lay-event="setDefault">设为默认地址</a>
                 <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                {{#  } }}
             </script>
         </div>
 

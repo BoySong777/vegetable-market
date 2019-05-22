@@ -77,6 +77,7 @@
                                 data:$.toJSON(me.field),
                                 contentType:'application/json',
                                 success:function (data) {
+
                                     if(data.data){
                                         layer.msg("添加成功",{time: 2000,icon: 1});
                                     }else{

@@ -4,6 +4,7 @@ import cn.lqs.base.BaseService;
 import cn.lqs.goods.bean.Goods;
 import cn.lqs.goods.bean.GoodsDetail;
 import cn.lqs.goods.bean.GoodsVo;
+import cn.lqs.util.QueryResult;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

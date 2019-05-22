@@ -77,7 +77,7 @@
             limits:[3,6,9,12],
             cols:[[
                 {field:'account',title:'用户名',width:80},
-                {field:'avatar',title:'头像',width:100,templet:'#userAvatar'},
+               /* {field:'avatar',title:'头像',width:100,templet:'#userAvatar'},*/
                 {field:'sexName',title:'性别',width:100},
                 {field:'phone',title:'手机号',width:150},
                 {field:'email',title:'邮箱',width:150},
@@ -89,15 +89,15 @@
         //监听提交
         form.on('submit(formDemo)', function(data) {
             tableIns.reload({
+                page:{
+                    curr:1
+                },
                 where:{
-                    page:{
-                        curr:1
-                    },
                     user:{
                         account:$.trim(data.field.account),
                         sex:data.field.sex,
                         phone:$.trim(data.field.phone),
-                        email:$.trim(data.field.email),
+                        email:$.trim(data.field.email)
                     }
                 }
             })

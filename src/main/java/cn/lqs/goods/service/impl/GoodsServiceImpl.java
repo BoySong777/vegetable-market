@@ -229,6 +229,7 @@ public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsSer
         goodsDao.updateSales(goodsDetail);
     }
 
+
     /**
      * 利用输入的搜索的词汇进行名字和标签的搜索，并对结果根据用户进行排序
      * @param searchValue
@@ -342,7 +343,7 @@ public class GoodsServiceImpl extends BaseServiceImpl<Goods> implements GoodsSer
             map.put("feature",1);
         }else if(adType.equals("solid")){
             map.put("feature",2);
-        }else if(adType.equals("soild")){
+        }else if(adType.equals("fresh")){
             map.put("feature",3);
         }
         switch (number){

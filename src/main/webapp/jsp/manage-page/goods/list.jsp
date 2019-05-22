@@ -36,7 +36,7 @@
                     <input id="stock" type="number" name="stock" placeholder="输入商品库存" autocomplete="off" class="layui-input">
                 </div>--%>
                 <button class="layui-btn" lay-submit lay-filter="formDemo">检索</button>
-                <button class="layui-btn" lay-submit lay-filter="searchStock">检索需补货商品</button>
+                <button class="layui-btn" lay-submit lay-filter="searchStock">补货商品</button>
             </div>
         </form>
     </div>
@@ -93,17 +93,17 @@
             contentType:'application/json',
             page:true,
             limit:3,
-            limits:[3,6,9,12],
+            limits:[3,4,5,6],
             cols:[[
-                {field:'name',title:'名称',width:80},
-                {field:'avatar',title:'商品图片',width:100,templet:'#userAvatar'},
-                {field:'categoryCodeName',title:'一级类别',width:100},
-                {field:'typeCodeName',title:'二级类别',width:100},
-                {field:'price',title:'价格',width:150,sort:true},
-                {field:'discount',title:'折扣',width:150},
-                {field:'brand',title:'品牌',width:150},
-                {field:'stock',title:'库存',width:100, templet: "#stockOperate"},
-                {title:'详情',width:100,toolbar:'#userAddress'},
+                {field:'name',title:'名称',width:200},
+                {field:'avatar',title:'商品图片',width:80,templet:'#userAvatar'},
+                {field:'categoryCodeName',title:'一级类别',width:80},
+                {field:'typeCodeName',title:'二级类别',width:80},
+                {field:'price',title:'价格',width:80,sort:true},
+                // {field:'discount',title:'折扣',width:150},
+                {field:'brand',title:'品牌',width:100},
+                {field:'stock',title:'库存',width:120, templet: "#stockOperate"},
+                {title:'详情',width:80,toolbar:'#userAddress'},
                 {fixed: 'right', title:'操作', toolbar: '#operate', width:150}
             ]],
             toolbar: true

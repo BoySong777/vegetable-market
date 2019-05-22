@@ -80,15 +80,15 @@
             limit: 3,
             limits: [3, 6, 9, 12],
             cols: [[
-                {field: 'createTime', title: '下单时间', width: 80},
-                {field: 'userName', title: '下单用户', width: 100},
-                {field: 'userInfo', title: '配送地址', width: 100},
-                {field: 'totalPrice', title: '支付金额', width: 100},
-                {field: 'payTime', title: '支付时间', width: 150},
-                {field: 'endTime', title: '完成时间', width: 150},
-                {field: 'id', title: '商品详情', width: 150, toolbar: '#goodDetail'},
-                {field: 'statusName', title: '订单状态', width: 100, templet: "#orderOperate"},
-                {fixed: 'right', title: '操作', toolbar: '#operate', width: 150}
+                {field: 'createTime', title: '下单时间', width: 120},
+                {field: 'userName', title: '下单用户', width: 80},
+                {field: 'userInfo', title: '配送地址', width: 140},
+                {field: 'totalPrice', title: '支付金额', width: 80},
+                {field: 'payTime', title: '支付时间', width: 120},
+                {field: 'endTime', title: '完成时间', width: 120},
+                {field: 'id', title: '商品详情', width: 80, toolbar: '#goodDetail'},
+                {field: 'statusName', title: '订单状态', width: 130, templet: "#orderOperate"},
+                {fixed: 'right', title: '操作', toolbar: '#operate', width: 120}
             ]],
             toolbar: true
         });

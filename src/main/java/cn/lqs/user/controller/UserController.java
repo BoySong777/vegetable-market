@@ -34,6 +34,7 @@ public class UserController extends BaseController {
         map.put("msg","");
         map.put("count",queryResult.getTotal());
         map.put("data",queryResult.getRows());
+        System.out.println("查询员工：后台查询成功将要返回");
         return map;
     }
 

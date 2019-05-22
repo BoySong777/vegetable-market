@@ -26,4 +26,5 @@ public interface GoodsDao extends DAO<Goods> {
     Integer queryNeedAddGoodsNum();
     List<Goods> queryByAd(Map<String,Object> map);
     void updateSales(GoodsDetail goodsDetail);
+
 }

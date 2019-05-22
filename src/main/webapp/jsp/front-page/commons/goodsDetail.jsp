@@ -54,7 +54,8 @@
         </div>
 
         <div class="productSaleAndReviewNumber">
-            <div>销量 <span class="redColor boldWord"> ${detailPageGoodsDetail.sales}</span></div>
+            <div>销量： <span class="redColor boldWord"> ${detailPageGoodsDetail.sales}</span></div>
+            <div>品牌/产地： <span class="redColor boldWord"> ${detailPageGoods.brand}</span></div>
         </div>
         <div class="productNumber">
             <span>数量</span>
