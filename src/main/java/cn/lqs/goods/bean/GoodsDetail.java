@@ -20,6 +20,9 @@ public class GoodsDetail extends DoMain {
     private String specification;//商品规格
     private Integer shelfLife;
     private String edibleMethod;
-    private String details;
-    private String description;
+    private Integer sales;
+
+    public Integer getSales() {
+        return sales==null?0:sales;
+    }
 }

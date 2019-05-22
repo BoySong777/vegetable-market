@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lqs.dao.BrowseRecordDao">
+    <sql id="params">
+        id,
+        user_id userId,
+        goods_id goodsId,
+        `number`
+    </sql>
+    <insert id="create" parameterType="cn.lqs.browse.bean.BrowseRecord">
+        insert into browse_record(id, user_id, goods_id, `number`) value (#{id}, #{userId}, #{goodsId}, 1)
+    </insert>
+    <update id="modify" parameterType="cn.lqs.browse.bean.BrowseRecord">
+        update browse_record
+        set `number` = #{number}
+        where id = #{id}
+    </update>
+    <select id="queryByUserAndGoods" parameterType="cn.lqs.browse.bean.BrowseRecord"
+            resultType="cn.lqs.browse.bean.BrowseRecord">
+        select <include refid="params"></include>
+        from browse_record
+        where user_id = #{userId} and goods_id = #{goodsId}
+    </select>
+    <select id="queryList" parameterType="cn.lqs.browse.bean.BrowseRecord"
+            resultType="cn.lqs.browse.bean.BrowseRecord">
+        select <include refid="params"></include>
+        from browse_record
+        where user_id = #{userId} and `number` > 2
+        order by `number` desc
+    </select>
+</mapper>

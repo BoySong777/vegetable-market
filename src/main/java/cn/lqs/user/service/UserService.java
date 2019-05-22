@@ -16,4 +16,8 @@ public interface UserService extends BaseService<User> {
     void signOut();
     Boolean verifyPwdIsTrue(User user);
     void updatePwd(User user);
+    void addLowPrice(String id);
+    void addSolid(String id);
+    void addFresh(String id);
+    void recoding(int typeNum,String id);
 }

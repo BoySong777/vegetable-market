@@ -64,7 +64,8 @@
                            onclick="menuCAClick('order/list.jsp',this)">订单列表</a></dt>
                 </dl>
             </li>
-            <li>
+
+            <li id="stuffManger" >
                 <a class="menuFA" href="javascript:void(0)"><i class="iconfont icon-ai-wallet left"></i>员工管理<i
                         class="iconfont icon-dajiantouyou right"></i></a>
                 <dl>
@@ -74,6 +75,7 @@
                     </dt>
                 </dl>
             </li>
+
         </ul>
     </div>
 </div>
@@ -105,4 +107,14 @@
     <!-- 核心区域 - 结束 -->
 </div>
 </body>
+<script>
+    $(function () {
+        var position = '${admin.position}';
+        if(position=='管理员'){
+            $('#stuffManger').show();
+        }else{
+            $('#stuffManger').hide();
+        }
+    })
+</script>
 </html>

@@ -12,7 +12,10 @@
         email,
         create_time createTime,
         token,
-        token_time tokenTime
+        token_time tokenTime,
+        low_price lowPrice,
+        solid,
+        fresh
     </sql>
     <select id="queryList" resultType="cn.lqs.user.bean.User">
         select <include refid="params"></include>
@@ -98,4 +101,13 @@
     <select id="updatePwd" parameterType="cn.lqs.user.bean.User">
         update user set password = #{password} where id = #{id}
     </select>
+    <update id="addLowPrice" parameterType="string">
+        update user set low_price = low_price + 1 where id = #{string}
+    </update>
+    <update id="addSolid" parameterType="string">
+        update user set solid = solid + 1 where id = #{string}
+    </update>
+    <update id="addFresh" parameterType="string">
+        update user set fresh = fresh + 1 where id = #{string}
+    </update>
 </mapper>

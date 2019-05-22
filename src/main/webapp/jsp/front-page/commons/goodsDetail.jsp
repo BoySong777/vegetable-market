@@ -53,10 +53,9 @@
             </div>
         </div>
 
-        <%--<div class="productSaleAndReviewNumber">
-            <div>销量 <span class="redColor boldWord"> 0</span></div>
-            <div>累计评价 <span class="redColor boldWord"> 0</span></div>
-        </div>--%>
+        <div class="productSaleAndReviewNumber">
+            <div>销量 <span class="redColor boldWord"> ${detailPageGoodsDetail.sales}</span></div>
+        </div>
         <div class="productNumber">
             <span>数量</span>
             <span>

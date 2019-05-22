@@ -16,5 +16,5 @@ import org.springframework.stereotype.Component;
 public class BrowseRecord extends DoMain {
     private String userId;
     private String goodsId;
-    private String categoryId;
+    private Integer number;
 }

@@ -44,8 +44,7 @@
 
 </div>
 <script type="text/html" id="operate">
-    <a class="layui-btn layui-btn-xs" lay-event="modify">修改</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-xs" lay-event="updateAddr">修改订单地址</a>
 </script>
 <script type="text/html" id="orderOperate">
     {{#  if(d.status==1){ }}
@@ -54,12 +53,13 @@
     {{d.statusName}}
     {{#  } }}
 </script>
-<script type="text/html" id="userAddress">
-    <a class="layui-table-link" lay-event="addr">查看</a>
+<script type="text/html" id="goodDetail">
+    <a class="layui-table-link" lay-event="deta">查看</a>
 </script>
 <script>
     var basePath = '${ctx}';
     var tableIns = null;
+    var orderId = "";
 
     layui.use(['table', 'form', 'laydate'], function () {
         var table = layui.table;
@@ -86,7 +86,7 @@
                 {field: 'totalPrice', title: '支付金额', width: 100},
                 {field: 'payTime', title: '支付时间', width: 150},
                 {field: 'endTime', title: '完成时间', width: 150},
-                {field: 'id', title: '商品详情', width: 150, toolbar: '#userAddress'},
+                {field: 'id', title: '商品详情', width: 150, toolbar: '#goodDetail'},
                 {field: 'statusName', title: '订单状态', width: 100, templet: "#orderOperate"},
                 {fixed: 'right', title: '操作', toolbar: '#operate', width: 150}
             ]],
@@ -147,17 +147,36 @@
 
                     });
                 })
-            } else if (obj.event == 'modify') {
-                window.location.href = "edit.jsp?" + "id=" + data.id;
-            } else if (obj.event == 'addr') {
-                //TODO:查看详情页
-                userId = data.id;
+            } else if (obj.event == 'updateAddr') {
+                layer.prompt({
+                    formType: 2,
+                    value: data.userInfo,
+                    title: '请输入值',
+                    area: ['400px', '100px'] //自定义文本域宽高
+                }, function(value, index, elem){
+                    $.ajax({
+                        url:basePath+"/order/updateAddress",
+                        type:"post",
+                        data:$.toJSON({id:data.id,userInfo:value}),
+                        contentType:"application/json",
+                        success:function (data) {
+                            if(data=="success"){
+                                layer.close(index);
+                                tableIns.reload();
+                                layer.msg("修改成功",{time: 2000,icon:1});
+                            }
+                        }
+                    });
+
+                });
+            } else if (obj.event == 'deta') {
+                orderId = data.id;
                 layer.open({
                     type: 2,
                     title: "地址列表",
-                    area: ['800px', '560px'],
+                    area: ['600px', '400px'],
                     shadeClose: true,
-                    content: 'addressDetail.jsp',
+                    content: 'goodsDetail.jsp',
                     end: function () {
                         tableIns.reload();
                     }
@@ -185,8 +204,8 @@
         });
     })*/
 
-    function getUserId() {
-        return userId;
+    function getOrderId() {
+        return orderId;
     }
 </script>
 </body>

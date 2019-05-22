@@ -64,7 +64,7 @@
                 <select name="position" id="position" lay-filter="position">
                     <option value="">--请选择--</option>
                     <option value="管理员">管理员</option>
-                    <option value="高级管理员">高级管理员</option>
+                    <option value="员工">员工</option>
                 </select>
             </div>
         </div>

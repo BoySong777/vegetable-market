@@ -5,6 +5,7 @@
  */
 package cn.lqs.dao;
 
+import cn.lqs.cart.bean.Cart;
 import cn.lqs.category.bean.Category;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface CategoryDao extends DAO<Category> {
     String selectNameByCode(long code);
 
     String queryNameByCode(long code);
+
+    Category searchName(String string);
 }

@@ -48,18 +48,18 @@
         </ul>
         <div class="slide fl">
             <ul class="slide_pics">
-                <li><img src="${img}carousel/slide.jpg" alt="幻灯片"></li>
-                <li><img src="${img}carousel/slide02.jpg" alt="幻灯片"></li>
-                <li><img src="${img}carousel/slide03.jpg" alt="幻灯片"></li>
-                <li><img src="${img}carousel/slide04.jpg" alt="幻灯片"></li>
+                <li><a href="${ctx}/goods/clickAdPic/${mainAd}/1"><img src="${img}ad/${mainAd}/carousel/slide.jpg" alt="幻灯片"></a></li>
+                <li><a href="${ctx}/goods/clickAdPic/${mainAd}/2"><img src="${img}ad/${mainAd}/carousel/slide02.jpg" alt="幻灯片"></a></li>
+                <li><a href="${ctx}/goods/clickAdPic/${mainAd}/3"><img src="${img}ad/${mainAd}/carousel/slide03.jpg" alt="幻灯片"></a></li>
+                <li><a href="${ctx}/goods/clickAdPic/${mainAd}/4"><img src="${img}ad/${mainAd}/carousel/slide04.jpg" alt="幻灯片"></a></li>
             </ul>
             <div class="prev"></div>
             <div class="next"></div>
             <ul class="points"></ul>
         </div>
         <div class="adv fl">
-            <a href="#"><img src="${img}recommend/adv01.jpg"></a>
-            <a href="#"><img src="${img}recommend//adv02.jpg"></a>
+            <a href="${ctx}/goods/clickAdPic/${secAd}/5"><img src="${img}ad/${secAd}/recommend/adv01.jpg"></a>
+            <a href="${ctx}/goods/clickAdPic/${thrAd}/5"><img src="${img}ad/${thrAd}/recommend/adv02.jpg"></a>
         </div>
     </div>
     <c:forEach items="${categoryList}" var="category">

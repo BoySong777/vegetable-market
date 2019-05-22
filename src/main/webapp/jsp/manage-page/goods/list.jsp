@@ -32,10 +32,11 @@
                 <div class="layui-input-inline">
                     <input id="brand" type="text" name="brand" placeholder="输入商品品牌" autocomplete="off" class="layui-input">
                 </div>
-                <div class="layui-input-inline">
+                <%--<div class="layui-input-inline">
                     <input id="stock" type="number" name="stock" placeholder="输入商品库存" autocomplete="off" class="layui-input">
-                </div>
+                </div>--%>
                 <button class="layui-btn" lay-submit lay-filter="formDemo">检索</button>
+                <button class="layui-btn" lay-submit lay-filter="searchStock">检索需补货商品</button>
             </div>
         </form>
     </div>
@@ -55,8 +56,11 @@
     <img height="40px" width="40px" src="${img}goods/{{d.categoryCode}}/{{d.typeCode}}/{{d.id}}/avatar/{{d.avatar}}">
     {{#  } }}
 </script>
+<script type="text/html" id="stockOperate">
+    {{d.stock}}<a href="javascript:void(0)" onclick=operateStock('{{d.id}}','{{d.stock}}') class="layui-table-link "> 补货</a>
+</script>
 <script type="text/html" id="userAddress">
-    <a class="layui-table-link" lay-event="addr">查看</a>
+    <a href="${ctx}/goods/goodsDetail/{{d.id}}"  target="view_window" class="layui-table-link">查看</a>
 </script>
 <script>
     var basePath = '${ctx}';
@@ -98,7 +102,7 @@
                 {field:'price',title:'价格',width:150,sort:true},
                 {field:'discount',title:'折扣',width:150},
                 {field:'brand',title:'品牌',width:150},
-                {field:'stock',title:'库存',width:100},
+                {field:'stock',title:'库存',width:100, templet: "#stockOperate"},
                 {title:'详情',width:100,toolbar:'#userAddress'},
                 {fixed: 'right', title:'操作', toolbar: '#operate', width:150}
             ]],
@@ -133,8 +137,22 @@
                         name:$.trim(data.field.name),
                         categoryCode:data.field.categoryCode,
                         typeCode:data.field.typeCode,
-                        brand:$.trim(data.field.brand),
-                        stock:data.field.stock
+                        brand:$.trim(data.field.brand)
+                        /*stock:data.field.stock*/
+                    }
+                }
+            })
+            return false;
+        });
+        //监听提交
+        form.on('submit(searchStock)', function(data) {
+            tableIns.reload({
+                page:{
+                    curr:1
+                },
+                where:{
+                    goods:{
+                        stock:10
                     }
                 }
             })
@@ -154,7 +172,7 @@
                         categoryCode:$('#firstType').val(),
                         typeCode:$('#secondType').val(),
                         brand:$.trim($('#brand').val()),
-                        stock:$('#stock').val()
+                        /*stock:$('#stock').val()*/
                     }
                 }
             });
@@ -198,6 +216,29 @@
     });
     function getUserId() {
         return userId;
+    }
+    function operateStock(id,stock){
+        layer.prompt({
+            formType: 0,
+            value: stock,
+            title: '请输入值',
+            area: ['400px', '100px'] //自定义文本域宽高
+        }, function(value, index, elem){
+            $.ajax({
+                url:basePath+"/goods/updateStock",
+                type:"post",
+                data:$.toJSON({id:id,stock:value}),
+                contentType:"application/json",
+                success:function (data) {
+                    if(data=="success"){
+                        layer.close(index);
+                        tableIns.reload();
+                        layer.msg("修改成功",{time: 2000,icon:1});
+                    }
+                }
+            });
+
+        });
     }
 </script>
 </body>

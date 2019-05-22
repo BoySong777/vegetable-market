@@ -20,4 +20,6 @@ public interface OrderDao extends DAO<Order> {
     void setShip(String id);
     void setFinish(Order order);
     void setUrge(String id);
+    void updateAddress(Order order);
+    Integer queryNoShipOrder();
 }

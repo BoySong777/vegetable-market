@@ -35,4 +35,9 @@
     <select id="queryNameByCode" parameterType="long" resultType="string">
         select name from category where code = #{long}
     </select>
+    <select id="searchName"
+            resultType="cn.lqs.category.bean.Category" parameterType="string">
+        select <include refid="params"></include>
+        from category where `name` = #{string};
+    </select>
 </mapper>

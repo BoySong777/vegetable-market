@@ -6,12 +6,19 @@
 package cn.lqs.goods.controller;
 
 import cn.lqs.base.BaseController;
+import cn.lqs.browse.bean.BrowseRecord;
+import cn.lqs.browse.service.BrowseRecordService;
 import cn.lqs.category.bean.Category;
 import cn.lqs.category.service.CategoryService;
+import cn.lqs.dao.StatisticsDao;
 import cn.lqs.goods.bean.Goods;
 import cn.lqs.goods.bean.GoodsDetail;
 import cn.lqs.goods.bean.GoodsVo;
 import cn.lqs.goods.service.GoodsService;
+import cn.lqs.statistics.bean.Statistics;
+import cn.lqs.statistics.service.StatisticsService;
+import cn.lqs.user.bean.User;
+import cn.lqs.user.service.UserService;
 import cn.lqs.util.QueryResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,9 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.jws.Oneway;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("goods")
@@ -32,6 +37,12 @@ public class GoodsController extends BaseController {
     private GoodsService goodsService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private BrowseRecordService browseRecordService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private StatisticsService statisticsService;
 
     @RequestMapping(value = "create",method = RequestMethod.POST)
     @ResponseBody
@@ -118,8 +129,23 @@ public class GoodsController extends BaseController {
 
     @RequestMapping(value = "/goodsDetail/{id}",method = RequestMethod.GET)
     private String goodsDetail(@PathVariable String id){
+        Statistics statistics = statisticsService.findByTimes(new Date());
+        if(statistics==null){
+            statistics = new Statistics();
+            statistics.setTimes(new Date());
+            statisticsService.create(statistics);
+        }
+        statisticsService.addAccess(statistics.getId());
+
         Goods goods = goodsService.queryById(id);
         GoodsDetail goodsDetail = goodsService.queryDetail(id);
+
+        User user = (User) session.getAttribute("user");
+        if(user!=null){
+            int goodsFeature = goods.getFeature();
+            this.recording(user.getId(),id,goodsFeature);
+        }
+
         String imgs = goodsDetail.getImgs();
         String[] goodsImgList = imgs.split(",");
         session.setAttribute("detailPageGoods",goods);
@@ -132,11 +158,13 @@ public class GoodsController extends BaseController {
     @RequestMapping("searchGoods")
     private String searchGoods(String searchValue){
         this.removeCategoryUtil();
-        GoodsVo goodsVo = new GoodsVo();
+        /*GoodsVo goodsVo = new GoodsVo();
         goodsVo.setPagingFlag(false);
         goodsVo.getGoods().setName(searchValue);
-        List<Goods> searchGoodsList  = goodsService.queryList(goodsVo);
+        List<Goods> searchGoodsList  = goodsService.queryList(goodsVo);*/
+        List<Goods> searchGoodsList = goodsService.searchGoods(searchValue);
         session.setAttribute("searchGoodsList",searchGoodsList);
+        session.setAttribute("searchVal",searchValue);
         return "front-page/goods/searchPage";
     }
     @RequestMapping("searchFirstCategory/{firstCategory}")
@@ -145,7 +173,7 @@ public class GoodsController extends BaseController {
         GoodsVo goodsVo = new GoodsVo();
         goodsVo.setPagingFlag(false);
         goodsVo.getGoods().setCategoryCode(firstCategory);
-        List<Goods> searchGoodsList  = goodsService.queryList(goodsVo);
+        List<Goods> searchGoodsList  = goodsService.queryGoodsByCategoryAndUser(goodsVo);
         String firstCategoryName = categoryService.queryNameByCode(firstCategory);
         session.setAttribute("searchGoodsList",searchGoodsList);
         session.setAttribute("searchFirstCategory",firstCategoryName);
@@ -160,7 +188,7 @@ public class GoodsController extends BaseController {
         goodsVo.getGoods().setTypeCode(typeCode);
         goodsVo.getGoods().setCategoryCode(firstCategory);
         System.out.println("查询条件goodsVo："+goodsVo);
-        List<Goods> searchGoodsList  = goodsService.queryList(goodsVo);
+        List<Goods> searchGoodsList  = goodsService.queryGoodsByCategoryAndUser(goodsVo);
         String firstCategoryName = categoryService.queryNameByCode(firstCategory);
         String typeCodeName = categoryService.queryNameByCode(typeCode);
         session.setAttribute("searchGoodsList",searchGoodsList);
@@ -169,8 +197,79 @@ public class GoodsController extends BaseController {
         return "front-page/goods/searchPage";
     }
 
+    @RequestMapping(value = "updateStock",method = RequestMethod.POST)
+    @ResponseBody
+    public String updateStock(@RequestBody Goods goods){
+        goodsService.updateStock(goods);
+        return "success";
+    }
+
     private void removeCategoryUtil(){
         session.removeAttribute("searchFirstCategory");
         session.removeAttribute("searchSecondCategory");
+        session.removeAttribute("searchVal");
     }
+
+    /**
+     * 记录用户的浏览记录
+     * @param userId
+     * @param goodsId
+     */
+    private void recording(String userId,String goodsId,int goodsFeature){
+        userService.recoding(goodsFeature,userId);
+
+        BrowseRecord b = new BrowseRecord();
+        b.setGoodsId(goodsId);
+        b.setUserId(userId);
+        BrowseRecord browseRecord = browseRecordService.queryByUserAndGoods(b);
+        if(browseRecord == null){
+            browseRecordService.create(b);
+        }else {
+            browseRecord.setNumber(browseRecord.getNumber()+1);
+            browseRecordService.modify(browseRecord);
+        }
+    }
+    @RequestMapping("sortGoodsByPrice/{sortType}")
+    private String sortGoodsByPrice(@PathVariable String sortType){
+        List<Goods> searchGoodsList = (List<Goods>) session.getAttribute("searchGoodsList");
+        if (sortType.equals("up")){
+            Collections.sort(searchGoodsList, new Comparator<Goods>() {
+                @Override
+                public int compare(Goods o1, Goods o2) {
+                    double price1 = o1.getPrice();
+                    double price2 = o2.getPrice();
+                    if(price1>price2){
+                        return 1;
+                    }else{
+                        return -1;
+                    }
+                }
+            });
+        }else {
+            Collections.sort(searchGoodsList, new Comparator<Goods>() {
+                @Override
+                public int compare(Goods o1, Goods o2) {
+                    double price1 = o1.getPrice();
+                    double price2 = o2.getPrice();
+                    if(price1>price2){
+                        return -1;
+                    }else{
+                        return 1;
+                    }
+                }
+            });
+        }
+        session.setAttribute("searchGoodsList",searchGoodsList);
+        return "front-page/goods/searchPage";
+    }
+
+    @RequestMapping("clickAdPic/{adType}/{number}")
+    private String clickAdPic(@PathVariable String adType,@PathVariable int number){
+        this.removeCategoryUtil();
+        List<Goods> searchGoodsList = goodsService.queryByAd(adType,number);
+        session.setAttribute("searchGoodsList",searchGoodsList);
+        return "front-page/goods/searchPage";
+    }
+
+
 }

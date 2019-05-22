@@ -6,9 +6,13 @@
 package cn.lqs.goods.bean;
 
 import cn.lqs.base.DoMain;
+import cn.lqs.util.CommUtil;
 import lombok.Data;
 import lombok.ToString;
 import org.springframework.stereotype.Component;
+
+import java.lang.reflect.Array;
+import java.util.*;
 
 @Data
 @ToString
@@ -25,5 +29,18 @@ public class Goods extends DoMain {
     private String brand;//品牌
     private Integer stock;//库存
     private String isDelete;//是否被删除
+    private Integer feature;//商品特征
+    private String searchSign;
+    private List<Integer> searchSignList;
+
+    /*public List<Integer> getSearchSignList() {
+        if (searchSign == null || ("").equals(searchSign)) {
+            return searchSignList;
+        }
+        String[] signArray = searchSign.split(",");
+        searchSignList = Arrays.asList(CommUtil.strToInt(signArray));
+        Collections.sort(searchSignList);
+        return searchSignList;
+    }*/
 
 }

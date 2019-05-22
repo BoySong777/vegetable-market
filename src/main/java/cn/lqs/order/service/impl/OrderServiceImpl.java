@@ -112,13 +112,23 @@ public class OrderServiceImpl extends BaseServiceImpl<Order> implements OrderSer
     public void setFinish(String id) {
         Order order = new Order();
         order.setId(id);
-        order.setPayTime(new Date());
+        order.setEndTime(new Date());
         orderDao.setFinish(order);
     }
 
     @Override
     public void setUrge(String id) {
         orderDao.setUrge(id);
+    }
+
+    @Override
+    public void updateAddress(Order order) {
+        orderDao.updateAddress(order);
+    }
+
+    @Override
+    public Integer queryNoShipOrder() {
+        return orderDao.queryNoShipOrder();
     }
 
     @Override

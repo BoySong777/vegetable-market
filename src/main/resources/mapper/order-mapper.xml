@@ -98,6 +98,13 @@
             and id = #{searchId}
         </if>
     </select>
+    <update id="updateAddress"  parameterType="cn.lqs.order.bean.Order">
+        update `order` set user_info = #{userInfo} where id = #{id}
+    </update>
+    <select id="queryNoShipOrder" resultType="integer">
+        select count(1)
+        from `order` where `status` = 1;
+    </select>
 
 
 </mapper>

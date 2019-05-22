@@ -57,10 +57,14 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">折扣</label>
+            <label class="layui-form-label">商品特征</label>
             <div class="layui-input-inline">
-                <input type="number" name="discount" autocomplete="off" placeholder="请输入折扣"
-                       class="layui-input">
+                <select name="feature" required lay-verify="required" id="feature" lay-filter="feature">
+                    <option value="0">--请选择--</option>
+                    <option value="1">价格便宜型</option>
+                    <option value="2">经济实惠型</option>
+                    <option value="3">新鲜上市型</option>
+                </select>
             </div>
         </div>
         <%--<div class="layui-form-item">
@@ -109,7 +113,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">保质期(天)</label>
             <div class="layui-input-inline">
-                <input type="number" name="shelfLife" required lay-verify="required" autocomplete="off" placeholder="请输入保质期"
+                <input type="number" name="shelfLife" required lay-verify="required" autocomplete="off"
+                       placeholder="请输入保质期"
                        class="layui-input">
             </div>
         </div>
@@ -122,10 +127,10 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">描述</label>
+            <label class="layui-form-label">商品搜索标签</label>
             <div class="layui-input-block">
-                <input type="text" name="description"  autocomplete="off"
-                       placeholder="请输入商品描述，可不写"
+                <input type="text" name="searchSign" autocomplete="off"
+                       placeholder="每一个标签使用空格作为分割"
                        class="layui-input">
             </div>
         </div>
@@ -174,9 +179,9 @@
     var basePath = '${ctx}';
     var avatar = "";//用于记录上传图片的名称
 
-    var success=0;
-    var fail=0;
-    var imgurls=""
+    var success = 0;
+    var fail = 0;
+    var imgurls = ""
     $(function ($) {
         $("#cleanImgs").click(cleanImgsPreview);
         $(".content").attr("style", "overflow-x:hidden;overflow-y:scroll;");
@@ -193,7 +198,7 @@
                 $.each(data.data, function (index, item) {
                     $("#firstType").append(new Option(item.name, item.code));
                 })
-               layui.form.render("select");
+                layui.form.render("select");
             }
         });
     })
@@ -201,43 +206,43 @@
         var form = layui.form;
         //form.render("select");
         var upload = layui.upload; //得到 upload 对象
-        form.on('submit(submitBut)', function(data) {
+        form.on('submit(submitBut)', function (data) {
             var me = data;
             $.ajax({
-                url:basePath+"/goods/create",
-                type:'post',
-                data:$.toJSON({
-                    goods:{
-                        name:me.field.name,
-                        categoryCode:me.field.categoryCode,
-                        typeCode:me.field.typeCode,
-                        price:me.field.price,
-                        discount:me.field.discount,
-                        avatar:avatar,
-                        brand:me.field.brand,
-                        stock:me.field.stock
+                url: basePath + "/goods/create",
+                type: 'post',
+                data: $.toJSON({
+                    goods: {
+                        name: me.field.name,
+                        categoryCode: me.field.categoryCode,
+                        typeCode: me.field.typeCode,
+                        price: me.field.price,
+                        feature: me.field.feature,
+                        avatar: avatar,
+                        brand: me.field.brand,
+                        stock: me.field.stock,
+                        searchSign:me.field.searchSign
                     },
-                    goodsDetail:{
-                        imgs:imgurls,
-                        specification:me.field.specification,
-                        shelfLife:me.field.shelfLife,
-                        edibleMethod:me.field.edibleMethod,
-                        details:me.field.details,
-                        description:me.field.description
+                    goodsDetail: {
+                        imgs: imgurls,
+                        specification: me.field.specification,
+                        shelfLife: me.field.shelfLife,
+                        edibleMethod: me.field.edibleMethod,
+                        details: me.field.details
                     }
                 }),
-                contentType:'application/json',
-                success:function (data) {
-                    if(data.code==0){
-                        layer.msg("添加成功",{time: 2000,icon: 1});
-                        setTimeout("location.reload()",2000);
-                       // window.location.reload();
-                    }else{
-                        layer.alert("添加失败！",{icon:5,title:"警告"});
+                contentType: 'application/json',
+                success: function (data) {
+                    if (data.code == 0) {
+                        layer.msg("添加成功", {time: 2000, icon: 1});
+                        setTimeout("location.reload()", 2000);
+                        // window.location.reload();
+                    } else {
+                        layer.alert("添加失败！", {icon: 5, title: "警告"});
                     }
                 },
-                error:function () {
-                    layer.alert("添加失败！ajax发送出现错误",{icon:5,title:"error"});
+                error: function () {
+                    layer.alert("添加失败！ajax发送出现错误", {icon: 5, title: "error"});
 
                 }
             });
@@ -290,51 +295,52 @@
             elem: '#detailImgs',
             url: basePath + '/goods/uploadImg',
             multiple: true,
-            auto:false,
+            auto: false,
 //			上传的单个图片大小
-            size:10240,
+            size: 10240,
 //			最多上传的数量
-            number:20,
+            number: 20,
 //			MultipartFile file 对应，layui默认就是file,要改动则相应改动
-            field:'file',
+            field: 'file',
             bindAction: '#test9',
-            before: function(obj) {
+            before: function (obj) {
                 //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result) {
+                obj.preview(function (index, file, result) {
                     $('#demo2').append('<img src="' + result
                         + '" alt="' + file.name
-                        +'"height="92px" width="92px" class="layui-upload-img uploadImgPreView">')
+                        + '"height="92px" width="92px" class="layui-upload-img uploadImgPreView">')
                 });
             },
-            done: function(res, index, upload) {
+            done: function (res, index, upload) {
                 //每个图片上传结束的回调，成功的话，就把新图片的名字保存起来，作为数据提交
                 console.log(res.code);
-                if(res.code!=0){
+                if (res.code != 0) {
                     fail++;
-                }else{
+                } else {
                     success++;
-                    imgurls=imgurls+""+res.data+",";
+                    imgurls = imgurls + "" + res.data + ",";
                 }
             },
-            allDone:function(obj){
-                layer.msg("总共要上传图片总数为："+(fail+success)+"\n"
-                    +"其中上传成功图片数为："+success+"\n"
-                    +"其中上传失败图片数为："+fail
+            allDone: function (obj) {
+                layer.msg("总共要上传图片总数为：" + (fail + success) + "\n"
+                    + "其中上传成功图片数为：" + success + "\n"
+                    + "其中上传失败图片数为：" + fail
                 )
             }
         });
 
     });
+
     /**
      * 清空预览的图片及其对应的成功失败数
      * 原因：如果已经存在预览的图片的话，再次点击上选择图片时，预览图片会不断累加
      * 表面上做上传成功的个数清0，实际后台已经上传成功保存了的，只是没有使用，以最终商品添加的提交的为准
       */
-    function cleanImgsPreview(){
-            success=0;
-            fail=0;
-            $('#demo2').html("");
-            $('#imgUrls').val("");
+    function cleanImgsPreview() {
+        success = 0;
+        fail = 0;
+        $('#demo2').html("");
+        $('#imgUrls').val("");
     }
 </script>
 </body>

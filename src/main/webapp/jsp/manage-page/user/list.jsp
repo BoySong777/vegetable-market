@@ -144,7 +144,7 @@
                 layer.open({
                     type: 2,
                     title: "地址列表",
-                    area: ['800px', '560px'],
+                    area: ['800px', '460px'],
                     shadeClose: true,
                     content:'addressDetail.jsp',
                     end:function () {

@@ -24,5 +24,11 @@ public class Test {
         //将原文件夹更改为A，其中路径是必要的。注意
         file1.renameTo(new File("f:/B"));*/
 
+        String a = ",1,1,1,";
+        String[] b = a.split(",");
+        for (String c:b){
+            System.out.println(c);
+        }
+
     }
 }

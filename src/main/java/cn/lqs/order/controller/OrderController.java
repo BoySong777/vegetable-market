@@ -11,11 +11,14 @@ import cn.lqs.base.BaseController;
 import cn.lqs.cart.bean.Cart;
 import cn.lqs.cart.service.CartService;
 import cn.lqs.goods.bean.Goods;
+import cn.lqs.goods.bean.GoodsDetail;
 import cn.lqs.goods.service.GoodsService;
 import cn.lqs.order.bean.Order;
 import cn.lqs.order.bean.OrderGoods;
 import cn.lqs.order.bean.OrderVo;
 import cn.lqs.order.service.OrderService;
+import cn.lqs.statistics.bean.Statistics;
+import cn.lqs.statistics.service.StatisticsService;
 import cn.lqs.user.bean.User;
 import cn.lqs.user.bean.UserVo;
 import cn.lqs.util.QueryResult;
@@ -24,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.jws.Oneway;
 import java.util.*;
 
 @RequestMapping("order")
@@ -38,6 +42,8 @@ public class OrderController extends BaseController {
     private AddressService addressService;
     @Autowired
     private CartService cartService;
+    @Autowired
+    private StatisticsService statisticsService;
 
     @RequestMapping("buyOne/{goodsId}/{number}")
     private String buyOne(@PathVariable String goodsId,@PathVariable int number){
@@ -69,10 +75,37 @@ public class OrderController extends BaseController {
     private String payed(@PathVariable String orderId){
         System.out.println("更改已付款状态的订单id："+orderId);
         orderService.setPayed(orderId);
+
+        Statistics statistics = statisticsService.findByTimes(new Date());
+        if(statistics==null){
+            statistics = new Statistics();
+            statistics.setTimes(new Date());
+            statisticsService.create(statistics);
+        }
+        double money = (double) session.getAttribute("totalGoodsPrice");
+        statistics.setSales(money);
+        statisticsService.addSales(statistics);
+
+        List<Cart> goodsList = (List<Cart>) session.getAttribute("buyGoodsList");
+        for(Cart cart:goodsList){
+            GoodsDetail goodsDetail = goodsService.queryDetail(cart.getGoodsId());
+            Integer sales = goodsDetail.getSales()==null?0:goodsDetail.getSales();
+            goodsDetail.setSales(sales+cart.getNumber());
+            goodsService.updateSales(goodsDetail);
+        }
+
         return  "front-page/goods/payedPage";
     }
     @RequestMapping("createOneGoodsOrder/{addressId}")
     private String createOneGoodsOrder(@PathVariable String addressId){
+
+        Statistics statistics = statisticsService.findByTimes(new Date());
+        if(statistics==null){
+            statistics = new Statistics();
+            statistics.setTimes(new Date());
+            statisticsService.create(statistics);
+        }
+        statisticsService.addOrders(statistics.getId());
         List<Cart> buyGoodsList = (List<Cart>) session.getAttribute("buyGoodsList");
         List<OrderGoods> goodsList = new ArrayList<>();
         for (Cart buyGoods:buyGoodsList){
@@ -175,6 +208,23 @@ public class OrderController extends BaseController {
     public String setShip(@PathVariable String orderId){
         orderService.setShip(orderId);
         return "success";
+    }
+    @RequestMapping(value = "updateAddress",method = RequestMethod.POST)
+    @ResponseBody
+    public String updateAddress(@RequestBody Order order){
+        orderService.updateAddress(order);
+        return "success";
+    }
+
+    @RequestMapping(value = "queryOrderGoodsByOrderId/{orderId}",method = RequestMethod.GET)
+    @ResponseBody
+    public Object queryOrderGoodsByOrderId(@PathVariable String orderId){
+        Map<String,Object> map = new HashMap<>();
+        List<OrderGoods> orderGoodsList = orderService.selectGoodsByOrderId(orderId);
+        map.put("code",0);
+        map.put("msg","");
+        map.put("data",orderGoodsList);
+        return map;
     }
 
 

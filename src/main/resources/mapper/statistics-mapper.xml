@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lqs.dao.StatisticsDao">
+    <sql id="params">
+        id,
+        sales,
+        orders,
+        access,
+        times
+    </sql>
+
+    <insert id="create" parameterType="cn.lqs.statistics.bean.Statistics">
+        insert into statistics(id, sales, orders, access, times) value (#{id},0,0,0,#{times})
+    </insert>
+    <select id="findByTimes" parameterType="date" resultType="cn.lqs.statistics.bean.Statistics">
+        select <include refid="params"></include>
+        from statistics
+        where TO_DAYS(times) = to_days(#{date})
+    </select>
+    <update id="addSales" parameterType="cn.lqs.statistics.bean.Statistics">
+        update statistics set sales = #{sales} + sales where id = #{id}
+    </update>
+    <update id="addOrders" parameterType="string">
+        update statistics set orders = orders+1 where id = #{string}
+    </update>
+    <update id="addAccess" parameterType="string">
+        update statistics set access = access+1 where id = #{string}
+    </update>
+
+</mapper>

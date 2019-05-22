@@ -21,4 +21,6 @@ public interface OrderService extends BaseService<Order> {
     void setShip(String id);
     void setFinish(String id);
     void setUrge(String id);
+    void updateAddress(Order order);
+    Integer queryNoShipOrder();
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lqs.dao.SearchSignDao">
+    <sql id="params">
+        id,
+        `code`,
+        `name`
+    </sql>
+    <insert id="create" useGeneratedKeys="true" keyColumn="code" keyProperty="code"
+            parameterType="cn.lqs.search.bean.SearchSign">
+        insert into select_sign(id, `code`, `name`) value (#{id},#{code},#{name})
+    </insert>
+    <select id="queryByName" parameterType="string" resultType="cn.lqs.search.bean.SearchSign">
+        select <include refid="params"></include>
+        from select_sign
+        where `name` = #{string}
+    </select>
+    <select id="queryByLikeName" parameterType="string" resultType="cn.lqs.search.bean.SearchSign">
+        select <include refid="params"></include>
+        from select_sign
+        where `name` like concat(#{string},'%')
+    </select>
+</mapper>

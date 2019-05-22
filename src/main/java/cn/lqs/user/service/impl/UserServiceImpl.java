@@ -51,6 +51,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     public Boolean verifyLogin(User user) {
         boolean isTrue = false;
         User user1 = userDao.verifyLogin(user);
+        System.out.println("测试登录查询到的user1"+user1);
         if(user1!=null){
             session.setAttribute("user",user1);
             isTrue = true;
@@ -114,5 +115,39 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     public void updatePwd(User user) {
         userDao.updatePassword(user);
         session.removeAttribute("user");
+    }
+
+    @Override
+    public void addLowPrice(String id) {
+        userDao.addLowPrice(id);
+    }
+
+    @Override
+    public void addSolid(String id) {
+        userDao.addSolid(id);
+    }
+
+    @Override
+    public void addFresh(String id) {
+        userDao.addFresh(id);
+    }
+
+    /**
+     * 当用户浏览商品时记录用户对每一个商品的浏览次数
+     * @param typeNum
+     * @param id
+     */
+    public void recoding(int typeNum,String id){
+        if(typeNum==1){
+            this.addLowPrice(id);
+            return;
+        }
+        if (typeNum==2){
+            this.addSolid(id);
+            return;
+        }
+        if(typeNum==3){
+            this.addFresh(id);
+        }
     }
 }

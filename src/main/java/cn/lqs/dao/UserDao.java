@@ -13,5 +13,8 @@ public interface UserDao extends DAO<User> {
     void setTokenById(User user);
     Integer verifyPwdIsTrue(User user);
     void updatePwd(User user);
+    void addLowPrice(String id);
+    void addSolid(String id);
+    void addFresh(String id);
 
 }

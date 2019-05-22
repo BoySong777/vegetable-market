@@ -5,13 +5,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<a href="${contextPath}">
+<a href="${ctx}/index.jsp">
     <img id="logo" src="${ctx}/assets/img/logo2.png" class="logo">
 </a>
 
 <form action="${ctx}/goods/searchGoods" method="post" >
     <div class="searchDiv">
-        <input name="searchValue" type="text" placeholder="香蕉  白菜 ">
+        <input name="searchValue" value="${searchVal}" type="text" placeholder="香蕉  白菜 ">
         <button  type="submit" class="searchButton">搜索</button>
 
     </div>

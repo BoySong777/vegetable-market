@@ -15,6 +15,9 @@
                     <a style="display:inlint-block;" href="javascript:void(0)">${searchFirstCategory}/${searchSecondCategory}&nbsp;&nbsp;</a>
                 </c:if>
                 <a style="display:inlint-block;">默认排序&nbsp;&nbsp;</a>
+                <a href="${ctx}/goods/sortGoodsByPrice/up" style="display:inlint-block;">价格<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span></a>
+                <a href="${ctx}/goods/sortGoodsByPrice/down" style="display:inlint-block;"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true">&nbsp;&nbsp;</a>
+
             </div>
 
             <c:forEach items="${searchGoodsList}" var="goods">
