@@ -109,7 +109,7 @@
 <div class="productReviewDiv" >
     <div class="productReviewTopPart">
         <a  href="#nowhere" class="productReviewTopPartSelectedLink">商品详情</a>
-        <a  href="#nowhere" class="selected">累计评价 <span class="productReviewTopReviewLinkNumber">0</span> </a>
+       <%-- <a  href="#nowhere" class="selected">累计评价 <span class="productReviewTopReviewLinkNumber">0</span> </a>--%>
     </div>
 
 
@@ -148,7 +148,7 @@
 
         <div class="productParamterList">
             <span>规格: ${detailPageGoodsDetail.specification} </span>
-            <span>保质期: ${detailPageGoodsDetail.shelfLife} </span>
+            <span>保质期: ${detailPageGoodsDetail.shelfLife}天 </span>
             <span>食用方法: ${detailPageGoodsDetail.edibleMethod} </span>
         </div>
         <div style="clear:both"></div>

@@ -19,6 +19,4 @@
 		<span>|</span>
 		<a href="#">友情链接</a>
 	</div>
-	<p>CopyRight © 2019 青松毕设作业 All Rights Reserved</p>
-	<p>电话：155*****161   京ICP备*******8号</p>
 </div>
